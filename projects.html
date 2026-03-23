@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Yoshiki Takeuchi</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -20%; left: -10%;
+      width: 60%; height: 60%;
+      background: radial-gradient(ellipse, rgba(107,70,193,0.3) 0%, transparent 65%);
+      filter: blur(60px);
+      pointer-events: none; z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -20%; right: -10%;
+      width: 50%; height: 50%;
+      background: radial-gradient(ellipse, rgba(76,81,191,0.25) 0%, transparent 65%);
+      filter: blur(60px);
+      pointer-events: none; z-index: 0;
+    }
+
+    .page-wrapper { position: relative; z-index: 1; }
+
+    /* ── Filter bar ── */
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+      justify-content: center;
+    }
+
+    .filter-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.5);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.45rem 1.1rem;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: rgba(139,92,246,0.25);
+      border-color: rgba(167,139,250,0.4);
+      color: #c4b5fd;
+    }
+
+    /* ── Projects grid ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    /* ── Project card — compact card style ── */
+    .project-card {
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(107,70,193,0.2);
+      border-color: rgba(167,139,250,0.25) !important;
+    }
+
+    /* Card icon area */
+    .card-icon-area {
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-icon-area::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.15;
+    }
+
+    /* Category color themes */
+    .card-icon-area.hardware::before  { background: linear-gradient(135deg, #7c3aed, #4f46e5); }
+    .card-icon-area.software::before  { background: linear-gradient(135deg, #0891b2, #0e7490); }
+    .card-icon-area.analog::before    { background: linear-gradient(135deg, #be185d, #9d174d); }
+    .card-icon-area.fpga::before      { background: linear-gradient(135deg, #b45309, #92400e); }
+    .card-icon-area.bci::before       { background: linear-gradient(135deg, #065f46, #064e3b); }
+    .card-icon-area.data::before      { background: linear-gradient(135deg, #1d4ed8, #1e40af); }
+
+    /* Card image (if available) */
+    .card-img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Card body */
+    .card-body {
+      padding: 1.25rem 1.4rem 1.4rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.6rem;
+    }
+
+    .project-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #a78bfa;
+      background: rgba(167,139,250,0.12);
+      border: 1px solid rgba(167,139,250,0.22);
+      padding: 0.22rem 0.65rem;
+      border-radius: 100px;
+    }
+
+    .card-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.15);
+    }
+
+    .project-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 0.6rem;
+    }
+
+    /* Skill pills */
+    .skill-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .skill-pill {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.09);
+      color: rgba(255,255,255,0.5);
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+    }
+
+    /* Short description — 2 lines max */
+    .project-desc {
+      font-size: 0.82rem;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.45);
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    /* Card footer */
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.85rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .card-course {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.25);
+      font-style: italic;
+    }
+
+    .card-links {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .card-link {
+      background: rgba(139,92,246,0.15);
+      border: 1px solid rgba(139,92,246,0.25);
+      color: #c4b5fd;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.28rem 0.7rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .card-link:hover {
+      background: rgba(139,92,246,0.35);
+      transform: translateY(-1px);
+    }
+
+    /* ── Hidden class for filter ── */
+    .project-card.hidden {
+      display: none;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">Yoshiki Takeuchi</div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="projects.html" class="nav-link active">Projects</a></li>
+        <li><a href="research.html" class="nav-link">Research</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="page-banner">
+    <p class="page-banner-label">Portfolio</p>
+    <h1>Projects</h1>
+    <p>Engineering work across hardware, software, and systems design.</p>
+  </div>
+
+  <main class="page-wrapper">
+
+    <!-- Filter bar -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="hardware">Hardware</button>
+      <button class="filter-btn" data-filter="software">Software</button>
+      <button class="filter-btn" data-filter="analog">Analog</button>
+      <button class="filter-btn" data-filter="fpga">FPGA</button>
+    </div>
+
+    <!-- Projects grid -->
+    <div class="projects-grid">
+
+      <!-- EEG BCI -->
+      <div class="project-card glass-card reveal" data-category="hardware">
+        <img src="assets/images/EEG_Pic.png" alt="EEG BCI" class="card-img">
+        <div class="card-body">
+          <div class="card-top">
+            <span class="project-tag">Senior Design</span>
+            <span class="card-number">01</span>
+          </div>
+          <h2 class="project-title">EEG Brain-Computer Interface</h2>
+          <div class="skill-pills">
+            <span class="skill-pill">PCB Design</span>
+            <span class="skill-pill">Microprocessor</span>
+            <span class="skill-pill">Signal Processing</span>
+          </div>
+          <p class="project-desc">BCI using EEG to enable hands-free device control for individuals with physical disabilities. Electrodes capture brain signals, processed by a microcontroller.</p>
+          <div class="card-footer">
+            <span class="card-course">ECE49022 · Purdue</span>
+            <div class="card-links">
+              <a href="assets/docs/Final Design Review.pdf" target="_blank" class="card-link">📽 Demo</a>
+              <a href="assets/docs/Design_Document_Team11.pdf" target="_blank" class="card-link">📄 Report</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Science -->
+      <div class="project-card glass-card reveal" data-category="software">
+        <div class="card-icon-area data">📊</div>
+        <div class="card-body">
+          <div class="card-top">
+            <span class="project-tag">Data Science</span>
+            <span class="card-number">02</span>
+          </div>
+          <h2 class="project-title">NYC Bike Traffic Data Analysis</h2>
+          <div class="skill-pills">
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">Pandas</span>
+            <span class="skill-pill">Matplotlib</span>
+            <span class="skill-pill">Linear Regression</span>
+          </div>
+          <p class="project-desc">Analyzed 100,000+ records of NYC bike traffic across 4 bridges, incorporating weather data to study cyclist population trends.</p>
+          <div class="card-footer">
+            <span class="card-course">ECE20875 · Purdue</span>
+            <div class="card-links"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DC-DC Controller -->
+      <div class="project-card glass-card reveal" data-category="hardware">
+        <div class="card-icon-area hardware">⚡</div>
+        <div class="card-body">
+          <div class="card-top">
+            <span class="project-tag">Embedded Systems</span>
+            <span class="card-number">03</span>
+          </div>
+          <h2 class="project-title">Four-Switch DC-DC Controller</h2>
+          <div class="skill-pills">
+            <span class="skill-pill">STM32</span>
+            <span class="skill-pill">Embedded C</span>
+            <span class="skill-pill">Firmware</span>
+            <span class="skill-pill">OLED</span>
+          </div>
+          <p class="project-desc">Controller reducing 24V to 0–12V with keypad input, OLED display, and STM32 timer interrupts for precise duty cycle control.</p>
+          <div class="card-footer">
+            <span class="card-course">ECE36200 · Purdue</span>
+            <div class="card-links"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lunar Lander FPGA -->
+      <div class="project-card glass-card reveal" data-category="fpga">
+        <div class="card-icon-area fpga">🚀</div>
+        <div class="card-body">
+          <div class="card-top">
+            <span class="project-tag">FPGA</span>
+            <span class="card-number">04</span>
+          </div>
+          <h2 class="project-title">Lunar Lander on FPGA</h2>
+          <div class="skill-pills">
+            <span class="skill-pill">SystemVerilog</span>
+            <span class="skill-pill">ICE40HX-8K</span>
+            <span class="skill-pill">Verilator</span>
+          </div>
+          <p class="project-desc">Lunar Lander simulation on FPGA displaying altitude, velocity, fuel, and thrust. ALU, Memory, and Control modules in SystemVerilog.</p>
+          <div class="card-footer">
+            <span class="card-course">ECE27000 · Purdue</span>
+            <div class="card-links"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Audio Equalizer -->
+      <div class="project-card glass-card reveal" data-category="analog">
+        <div class="card-icon-area analog">🎵</div>
+        <div class="card-body">
+          <div class="card-top">
+            <span class="project-tag">Analog Design</span>
+            <span class="card-number">05</span>
+          </div>
+          <h2 class="project-title">Audio Equalizer Circuit</h2>
+          <div class="skill-pills">
+            <span class="skill-pill">LTSpice</span>
+            <span class="skill-pill">Op-Amps</span>
+            <span class="skill-pill">Filter Design</span>
+          </div>
+          <p class="project-desc">Multi-band audio equalizer with low-pass, band-pass, and high-pass filters using inverting op-amps, verified with LTSpice simulation.</p>
+          <div class="card-footer">
+            <span class="card-course">ECE20007 · Purdue</span>
+            <div class="card-links"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Heart Rate Sensor -->
+      <div class="project-card glass-card reveal" data-category="analog">
+        <div class="card-icon-area bci">❤️</div>
+        <div class="card-body">
+          <div class="card-top">
+            <span class="project-tag">Signal Processing</span>
+            <span class="card-number">06</span>
+          </div>
+          <h2 class="project-title">Optical Heart Rate Sensor</h2>
+          <div class="skill-pills">
+            <span class="skill-pill">ADC</span>
+            <span class="skill-pill">Active Filters</span>
+            <span class="skill-pill">Comparator</span>
+          </div>
+          <p class="project-desc">Heart rate monitor using cascaded active filters and comparator ADC. Accurately monitors 40–200 BPM with LED visual feedback.</p>
+          <div class="card-footer">
+            <span class="card-course">ECE20008 · Purdue</span>
+            <div class="card-links"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    © 2025 Yoshiki Takeuchi &nbsp;·&nbsp;
+    <a href="https://www.linkedin.com/in/yoshiki-takeuchi-6a8500245" target="_blank">LinkedIn</a> &nbsp;·&nbsp;
+    <a href="mailto:ytakeuch92416@gmail.com">Email</a>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    /* Filter functionality */
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const cards      = document.querySelectorAll(".project-card");
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        filterBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          const match = filter === "all" || card.dataset.category === filter;
+          card.classList.toggle("hidden", !match);
+          if (match) card.classList.add("visible");
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,332 @@
+/* ============================================================
+   GLOBAL RESET
+   ============================================================ */
+   * { margin: 0; padding: 0; box-sizing: border-box; }
+   html { scroll-behavior: smooth; }
+   
+   body {
+     font-family: 'DM Sans', sans-serif;
+     background: #0a0a0f;
+     color: rgba(255,255,255,0.85);
+     font-size: 1rem;
+     line-height: 1.7;
+     overflow-x: hidden;
+   }
+   
+   /* ============================================================
+      NAVBAR — glass
+      ============================================================ */
+   .navbar {
+     position: fixed;
+     top: 0; left: 0; right: 0;
+     z-index: 200;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 1rem 2.5rem;
+     background: rgba(255,255,255,0.06);
+     backdrop-filter: blur(24px) saturate(180%);
+     -webkit-backdrop-filter: blur(24px) saturate(180%);
+     border-bottom: 1px solid rgba(255,255,255,0.1);
+     transition: transform 0.3s ease;
+   }
+   
+   .logo {
+     font-family: 'DM Serif Display', serif;
+     font-size: 1.2rem;
+     color: rgba(255,255,255,0.95);
+     letter-spacing: -0.01em;
+   }
+   
+   .navbar ul {
+     list-style: none;
+     display: flex;
+     gap: 0.25rem;
+     margin: 0; padding: 0;
+   }
+   
+   .navbar a {
+     text-decoration: none;
+     color: rgba(255,255,255,0.65);
+     font-size: 0.88rem;
+     font-weight: 500;
+     padding: 0.45rem 0.9rem;
+     border-radius: 100px;
+     transition: all 0.2s ease;
+     position: relative;
+   }
+   
+   .navbar a:hover,
+   .navbar a.active {
+     color: #fff;
+     background: rgba(255,255,255,0.12);
+   }
+   
+   /* Hamburger */
+   .nav-toggle {
+     display: none;
+     flex-direction: column;
+     gap: 5px;
+     cursor: pointer;
+     background: none;
+     border: none;
+     padding: 4px;
+   }
+   .nav-toggle span {
+     display: block; width: 22px; height: 2px;
+     background: rgba(255,255,255,0.8);
+     border-radius: 2px; transition: all 0.3s ease;
+   }
+   
+   /* ============================================================
+      SHARED PAGE WRAPPER
+      ============================================================ */
+   .page-wrapper {
+     max-width: 1100px;
+     margin: 0 auto;
+     padding: 7rem 2rem 5rem;
+   }
+   
+   /* ============================================================
+      SHARED PAGE HEADER BANNER
+      ============================================================ */
+   .page-banner {
+     position: relative;
+     overflow: hidden;
+     padding: 7rem 2rem 4rem;
+     text-align: center;
+   }
+   
+   .page-banner::before {
+     content: '';
+     position: absolute;
+     top: -100px; left: 50%;
+     transform: translateX(-50%);
+     width: 600px; height: 400px;
+     background: radial-gradient(ellipse, rgba(107,70,193,0.35) 0%, transparent 65%);
+     filter: blur(40px);
+     pointer-events: none;
+   }
+   
+   .page-banner-label {
+     font-size: 0.72rem;
+     font-weight: 700;
+     letter-spacing: 0.14em;
+     text-transform: uppercase;
+     color: #a78bfa;
+     margin-bottom: 0.75rem;
+   }
+   
+   .page-banner h1 {
+     font-family: 'DM Serif Display', serif;
+     font-size: clamp(2.4rem, 5vw, 3.6rem);
+     font-weight: 400;
+     color: #fff;
+     line-height: 1.1;
+     margin-bottom: 0.75rem;
+   }
+   
+   .page-banner p {
+     font-size: 1rem;
+     color: rgba(255,255,255,0.5);
+     max-width: 500px;
+     margin: 0 auto;
+   }
+   
+   /* ============================================================
+      GLASS CARD — reusable
+      ============================================================ */
+   .glass-card {
+     background: rgba(255,255,255,0.05);
+     backdrop-filter: blur(24px) saturate(160%);
+     -webkit-backdrop-filter: blur(24px) saturate(160%);
+     border: 1px solid rgba(255,255,255,0.1);
+     border-radius: 20px;
+     box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04) inset;
+     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+   }
+   
+   .glass-card:hover {
+     transform: translateY(-4px);
+     box-shadow: 0 16px 60px rgba(0,0,0,0.5), 0 0 30px rgba(107,70,193,0.15);
+     border-color: rgba(255,255,255,0.18);
+   }
+   
+   /* ============================================================
+      GLASS BUTTON
+      ============================================================ */
+   .btn-glass-primary {
+     background: rgba(139,92,246,0.85);
+     backdrop-filter: blur(10px);
+     color: #fff;
+     padding: 0.75rem 1.75rem;
+     border-radius: 100px;
+     font-weight: 600;
+     font-size: 0.88rem;
+     text-decoration: none;
+     border: 1px solid rgba(167,139,250,0.5);
+     box-shadow: 0 4px 20px rgba(107,70,193,0.4);
+     transition: all 0.25s ease;
+     display: inline-flex;
+     align-items: center;
+     gap: 0.4rem;
+   }
+   .btn-glass-primary:hover {
+     background: rgba(139,92,246,1);
+     transform: translateY(-2px);
+     box-shadow: 0 8px 30px rgba(107,70,193,0.6);
+   }
+   
+   .btn-glass-outline {
+     background: rgba(255,255,255,0.07);
+     backdrop-filter: blur(10px);
+     color: rgba(255,255,255,0.85);
+     padding: 0.75rem 1.75rem;
+     border-radius: 100px;
+     font-weight: 600;
+     font-size: 0.88rem;
+     text-decoration: none;
+     border: 1px solid rgba(255,255,255,0.18);
+     transition: all 0.25s ease;
+     display: inline-flex;
+     align-items: center;
+     gap: 0.4rem;
+   }
+   .btn-glass-outline:hover {
+     background: rgba(255,255,255,0.12);
+     transform: translateY(-2px);
+     border-color: rgba(255,255,255,0.3);
+   }
+   
+   /* ============================================================
+      GRADIENT TEXT
+      ============================================================ */
+   .gradient-text {
+     background: linear-gradient(135deg, #c4b5fd, #818cf8, #a78bfa);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     background-clip: text;
+   }
+   
+   .gradient-text-alt {
+     background: linear-gradient(135deg, #818cf8, #c4b5fd);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     background-clip: text;
+   }
+   
+   /* ============================================================
+      TAGS
+      ============================================================ */
+   .tags {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 0.45rem;
+     margin-bottom: 1.25rem;
+   }
+   .tags span {
+     background: rgba(255,255,255,0.07);
+     border: 1px solid rgba(255,255,255,0.14);
+     color: rgba(255,255,255,0.7);
+     font-size: 0.65rem;
+     font-weight: 700;
+     letter-spacing: 0.1em;
+     padding: 0.3rem 0.8rem;
+     border-radius: 100px;
+     text-transform: uppercase;
+     transition: all 0.2s ease;
+   }
+   .tags span:hover {
+     background: rgba(107,70,193,0.4);
+     color: #fff;
+     border-color: rgba(107,70,193,0.6);
+   }
+   
+   /* ============================================================
+      ANIMATIONS
+      ============================================================ */
+   .reveal {
+     opacity: 0;
+     transform: translateY(24px);
+     transition: opacity 0.6s ease, transform 0.6s ease;
+   }
+   .reveal.visible { opacity: 1; transform: translateY(0); }
+   
+   .reveal-stagger > * {
+     opacity: 0;
+     transform: translateY(20px);
+     transition: opacity 0.5s ease, transform 0.5s ease;
+   }
+   .reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:translateY(0); transition-delay:0s; }
+   .reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:translateY(0); transition-delay:0.12s; }
+   .reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:translateY(0); transition-delay:0.24s; }
+   
+   .typed-word {
+     border-right: 2px solid #a78bfa;
+     padding-right: 3px;
+     animation: blink 0.75s step-end infinite;
+     font-style: italic;
+   }
+   @keyframes blink { 50% { border-color: transparent; } }
+   
+   @keyframes fadeInUp {
+     from { opacity: 0; transform: translateY(20px); }
+     to   { opacity: 1; transform: translateY(0); }
+   }
+   
+   @keyframes morphBlob {
+     0%, 100% { border-radius: 40% 60% 55% 45% / 45% 40% 60% 55%; }
+     33%       { border-radius: 58% 42% 40% 60% / 60% 55% 45% 40%; }
+     66%       { border-radius: 45% 55% 60% 40% / 40% 60% 45% 55%; }
+   }
+   
+   /* ============================================================
+      FOOTER
+      ============================================================ */
+   .site-footer {
+     text-align: center;
+     padding: 2rem;
+     border-top: 1px solid rgba(255,255,255,0.06);
+     color: rgba(255,255,255,0.3);
+     font-size: 0.82rem;
+   }
+   .site-footer a {
+     color: rgba(255,255,255,0.4);
+     text-decoration: none;
+     transition: color 0.2s ease;
+   }
+   .site-footer a:hover { color: #a78bfa; }
+   
+   /* ============================================================
+      RESPONSIVE
+      ============================================================ */
+   @media (max-width: 900px) {
+     .navbar { padding: 1rem 1.5rem; }
+     .page-wrapper { padding: 6rem 1.5rem 4rem; }
+   }
+   
+   @media (max-width: 600px) {
+     .navbar { padding: 0.85rem 1.25rem; }
+     .nav-toggle { display: flex; }
+     .navbar nav {
+       display: none;
+       position: absolute;
+       top: 60px; left: 0; right: 0;
+       background: rgba(10,10,15,0.96);
+       backdrop-filter: blur(20px);
+       padding: 1rem 0;
+       border-bottom: 1px solid rgba(255,255,255,0.08);
+       z-index: 99;
+     }
+     .navbar nav.open { display: block; }
+     .navbar ul { flex-direction: column; gap: 0; align-items: center; }
+     .navbar ul li { width: 100%; text-align: center; }
+     .navbar a { display: block; padding: 0.85rem 1rem; border-radius: 0; }
+     .page-wrapper { padding: 5rem 1rem 3rem; }
+     .page-banner { padding: 5.5rem 1.25rem 3rem; }
+     .page-banner h1 { font-size: 2.2rem; }
+   }
+   
+   @media (max-height: 500px) and (orientation: landscape) {
+     .page-wrapper { padding: 4.5rem 2rem 2rem; }
+   }

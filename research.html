@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research — Yoshiki Takeuchi</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -20%; right: -10%;
+      width: 65%; height: 65%;
+      background: radial-gradient(ellipse, rgba(107,70,193,0.28) 0%, transparent 65%);
+      filter: blur(60px);
+      pointer-events: none; z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -20%; left: -10%;
+      width: 55%; height: 55%;
+      background: radial-gradient(ellipse, rgba(76,81,191,0.22) 0%, transparent 65%);
+      filter: blur(60px);
+      pointer-events: none; z-index: 0;
+    }
+
+    .page-wrapper {
+      position: relative; z-index: 1;
+      max-width: 980px;
+    }
+
+    /* ══════════════════════════
+       RESEARCH HERO CARD
+       ══════════════════════════ */
+    .research-card {
+      border-radius: 24px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    /* ── Image banner ── */
+    .research-banner {
+      position: relative;
+      height: 280px;
+      overflow: hidden;
+    }
+
+    .research-banner img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.45);
+      transition: transform 0.7s ease, filter 0.4s ease;
+    }
+
+    .research-card:hover .research-banner img {
+      transform: scale(1.04);
+      filter: brightness(0.55);
+    }
+
+    .research-banner::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,10,15,0.1) 0%,
+        rgba(10,10,15,0.5) 55%,
+        rgba(10,10,15,0.97) 100%
+      );
+    }
+
+    .banner-badge {
+      position: absolute;
+      top: 1.25rem; left: 1.5rem;
+      z-index: 2;
+      background: rgba(139,92,246,0.75);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(167,139,250,0.4);
+      color: #fff;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.32rem 0.85rem;
+      border-radius: 100px;
+    }
+
+    .banner-year {
+      position: absolute;
+      top: 1.25rem; right: 1.5rem;
+      z-index: 2;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.65);
+      font-size: 0.7rem; font-weight: 600;
+      padding: 0.32rem 0.85rem;
+      border-radius: 100px;
+    }
+
+    .banner-title {
+      position: absolute;
+      bottom: 1.75rem; left: 2rem; right: 2rem;
+      z-index: 2;
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.25rem, 2.5vw, 1.8rem);
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.22;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.6);
+    }
+
+    /* ── Card body ── */
+    .research-body {
+      padding: 2.25rem 2.5rem 2.5rem;
+    }
+
+    /* ── Advisor row ── */
+    .advisor-row {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      flex-wrap: wrap;
+    }
+
+    .advisor-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(139,92,246,0.3), rgba(99,102,241,0.3));
+      border: 1px solid rgba(167,139,250,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+
+    .advisor-text {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.5;
+    }
+
+    .advisor-text strong {
+      color: rgba(255,255,255,0.75);
+      font-weight: 600;
+    }
+
+    /* ── Abstract ── */
+    .abstract-block {
+      background: rgba(139,92,246,0.06);
+      border: 1px solid rgba(139,92,246,0.12);
+      border-left: 3px solid rgba(139,92,246,0.5);
+      border-radius: 0 12px 12px 0;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .abstract-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #a78bfa;
+      margin-bottom: 0.6rem;
+    }
+
+    .abstract-text {
+      font-size: 0.9rem;
+      line-height: 1.82;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ── Keywords ── */
+    .keyword-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 2rem;
+    }
+
+    .keyword-chip {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      color: rgba(255,255,255,0.5);
+      font-size: 0.74rem;
+      font-weight: 500;
+      padding: 0.28rem 0.75rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .keyword-chip:hover {
+      background: rgba(139,92,246,0.15);
+      border-color: rgba(167,139,250,0.3);
+      color: #c4b5fd;
+    }
+
+    /* ── Impact metrics ── */
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 2.25rem;
+    }
+
+    .impact-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 1.25rem 1rem;
+      text-align: center;
+      transition: all 0.25s ease;
+    }
+
+    .impact-card:hover {
+      background: rgba(139,92,246,0.08);
+      border-color: rgba(139,92,246,0.2);
+      transform: translateY(-3px);
+    }
+
+    .impact-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .impact-title {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #a78bfa;
+      margin-bottom: 0.4rem;
+    }
+
+    .impact-desc {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.5;
+    }
+
+    /* ── Two-column body ── */
+    .body-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2.25rem;
+    }
+
+    .section-mini-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: #a78bfa;
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-mini-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(167,139,250,0.15);
+    }
+
+    .body-text {
+      font-size: 0.88rem;
+      line-height: 1.82;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── Process timeline ── */
+    .process-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .process-step {
+      display: flex;
+      gap: 0.85rem;
+      position: relative;
+    }
+
+    /* Connecting line between steps */
+    .process-step:not(:last-child) .step-line {
+      position: absolute;
+      left: 10px;
+      top: 24px;
+      width: 1px;
+      height: calc(100% + 0px);
+      background: linear-gradient(to bottom, rgba(139,92,246,0.4), rgba(139,92,246,0.1));
+    }
+
+    .step-dot-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      padding-top: 0.1rem;
+    }
+
+    .step-dot {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(139,92,246,0.2);
+      border: 1.5px solid rgba(139,92,246,0.45);
+      color: #c4b5fd;
+      font-size: 0.62rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-connector {
+      width: 1px;
+      flex: 1;
+      min-height: 16px;
+      background: linear-gradient(to bottom, rgba(139,92,246,0.3), rgba(139,92,246,0.05));
+      margin: 3px 0;
+    }
+
+    .step-content {
+      padding-bottom: 1rem;
+    }
+
+    .step-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 0.2rem;
+    }
+
+    .step-desc {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.55;
+    }
+
+    /* ── Action buttons ── */
+    .research-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      padding-top: 1.75rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .action-btn {
+      background: rgba(139,92,246,0.15);
+      border: 1px solid rgba(139,92,246,0.3);
+      color: #c4b5fd;
+      padding: 0.65rem 1.4rem;
+      border-radius: 100px;
+      font-size: 0.83rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.22s ease;
+    }
+
+    .action-btn:hover {
+      background: rgba(139,92,246,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(107,70,193,0.3);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 780px) {
+      .body-grid     { grid-template-columns: 1fr; gap: 1.5rem; }
+      .impact-grid   { grid-template-columns: 1fr; gap: 0.75rem; }
+      .research-banner { height: 220px; }
+      .research-body { padding: 1.5rem 1.25rem; }
+      .banner-title  { font-size: 1.1rem; left: 1.25rem; right: 1.25rem; }
+    }
+
+    @media (max-width: 500px) {
+      .research-actions { flex-direction: column; }
+      .action-btn { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">Yoshiki Takeuchi</div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="research.html" class="nav-link active">Research</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="page-banner">
+    <p class="page-banner-label">Academic Work</p>
+    <h1>Research</h1>
+    <p>Semiconductor fabrication and heterogeneous integration for next-generation space electronics.</p>
+  </div>
+
+  <main class="page-wrapper">
+
+    <div class="research-card glass-card reveal">
+
+      <!-- ── Banner ── -->
+      <div class="research-banner">
+        <img src="assets/images/wafer.jpg" alt="Silicon wafer fabrication">
+        <span class="banner-badge">🔬 Purdue BNC</span>
+        <span class="banner-year">2024 – 2025</span>
+        <h2 class="banner-title">Methods For Securing Commercial Dies In Silicon<br>Substrates For Heterogeneous Integration</h2>
+      </div>
+
+      <!-- ── Body ── -->
+      <div class="research-body">
+
+        <!-- Advisor -->
+        <div class="advisor-row">
+          <div class="advisor-icon">👨‍🔬</div>
+          <div class="advisor-text">
+            <strong>Prof. Zhihong Chen & Prof. Peter Bermel</strong><br>
+            Purdue University · Birck Nanotechnology Center · ECE Department
+          </div>
+        </div>
+
+        <!-- Abstract -->
+        <div class="abstract-block">
+          <p class="abstract-label">Abstract</p>
+          <p class="abstract-text">
+            This research prototypes and refines specialized 2.5D Heterogeneous Integration (HI) processes for embedding millimeter-level commercial chiplets — specifically d-latch memory microchips and photodiodes — onto a silicon-based interposer for low-earth orbit (LEO) satellite system applications. By leveraging silicon's unique material properties and the structural advantages of 2.5D packaging, the system achieves reduced interconnect lengths, lower power consumption, and improved signal integrity. Through extensive cleanroom prototyping and iterative process optimization, this work aims to deliver a reliable and cost-effective packaging solution for next-generation space electronics.
+          </p>
+        </div>
+
+        <!-- Keywords -->
+        <div class="keyword-chips">
+          <span class="keyword-chip">2.5D Heterogeneous Integration</span>
+          <span class="keyword-chip">Silicon Interposer</span>
+          <span class="keyword-chip">Cleanroom Fabrication</span>
+          <span class="keyword-chip">Electroplating</span>
+          <span class="keyword-chip">Copper Seed Layer</span>
+          <span class="keyword-chip">Photolithography</span>
+          <span class="keyword-chip">Chiplet Integration</span>
+          <span class="keyword-chip">LEO Satellite Systems</span>
+          <span class="keyword-chip">D-Latch Memory</span>
+          <span class="keyword-chip">Photodiodes</span>
+        </div>
+
+        <!-- Impact metrics -->
+        <div class="impact-grid">
+          <div class="impact-card">
+            <div class="impact-icon">⚡</div>
+            <div class="impact-title">Power Efficiency</div>
+            <div class="impact-desc">Reduced power consumption via minimized interconnect lengths between chiplets</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-icon">📡</div>
+            <div class="impact-title">Signal Integrity</div>
+            <div class="impact-desc">Enhanced signal fidelity critical for high-radiation LEO satellite environments</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-icon">🛰️</div>
+            <div class="impact-title">Space Application</div>
+            <div class="impact-desc">Cost-effective 2.5D packaging solution for commercial satellite manufacturers</div>
+          </div>
+        </div>
+
+        <!-- Two-column: Overview + Process Flow -->
+        <div class="body-grid">
+
+          <!-- Left: Overview + Motivation -->
+          <div>
+            <p class="section-mini-label">Overview & Motivation</p>
+            <p class="body-text">
+              Modern satellite systems demand compact, power-efficient electronics capable of operating reliably in the harsh conditions of low-earth orbit — including intense radiation, vacuum, and extreme thermal cycling. Traditional single-chip solutions struggle to meet the combined requirements of high integration density, low power, and design flexibility.
+            </p>
+            <br>
+            <p class="body-text">
+              2.5D Heterogeneous Integration addresses these challenges by enabling distinct chiplets — each optimized independently — to be co-packaged on a common silicon interposer. This research investigates reliable methods for physically securing commercial off-the-shelf (COTS) dies within etched silicon cavities, establishing stable electrical interconnections suitable for space-grade deployment.
+            </p>
+          </div>
+
+          <!-- Right: Process Flow -->
+          <div>
+            <p class="section-mini-label">Fabrication Process Flow</p>
+            <div class="process-timeline">
+
+              <div class="process-step">
+                <div class="step-dot-wrap">
+                  <div class="step-dot">1</div>
+                  <div class="step-connector"></div>
+                </div>
+                <div class="step-content">
+                  <p class="step-title">Substrate Patterning</p>
+                  <p class="step-desc">Photolithographic pattern-etching of the silicon carrier substrate to create precise die cavities.</p>
+                </div>
+              </div>
+
+              <div class="process-step">
+                <div class="step-dot-wrap">
+                  <div class="step-dot">2</div>
+                  <div class="step-connector"></div>
+                </div>
+                <div class="step-content">
+                  <p class="step-title">Copper Seed Layer</p>
+                  <p class="step-desc">Deposit a thin copper seed layer across substrate gaps to enable subsequent electroplating.</p>
+                </div>
+              </div>
+
+              <div class="process-step">
+                <div class="step-dot-wrap">
+                  <div class="step-dot">3</div>
+                  <div class="step-connector"></div>
+                </div>
+                <div class="step-content">
+                  <p class="step-title">Electroplating</p>
+                  <p class="step-desc">Grow copper through electroplating to mechanically secure chiplets within the cavities.</p>
+                </div>
+              </div>
+
+              <div class="process-step">
+                <div class="step-dot-wrap">
+                  <div class="step-dot">4</div>
+                  <div class="step-connector"></div>
+                </div>
+                <div class="step-content">
+                  <p class="step-title">Insulation Layer</p>
+                  <p class="step-desc">Deposit dielectric insulation to protect the foundation layer from shorting.</p>
+                </div>
+              </div>
+
+              <div class="process-step">
+                <div class="step-dot-wrap">
+                  <div class="step-dot">5</div>
+                  <div class="step-connector"></div>
+                </div>
+                <div class="step-content">
+                  <p class="step-title">Interconnect Patterning</p>
+                  <p class="step-desc">Deposit photoresist and copper, pattern redistribution connections, metallize signal traces.</p>
+                </div>
+              </div>
+
+              <div class="process-step">
+                <div class="step-dot-wrap">
+                  <div class="step-dot">6</div>
+                </div>
+                <div class="step-content">
+                  <p class="step-title">Final Lift-Off</p>
+                  <p class="step-desc">Lift-off process to define and expose electrical connection pins for external interfacing.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Action buttons -->
+        <div class="research-actions">
+          <a href="assets/docs/Spr25_APHI-Si_BNC200.pdf" target="_blank" class="action-btn">📄 Process Flow Document</a>
+          <a href="assets/docs/Poster SP25 APHI-Si.pdf"  target="_blank" class="action-btn">🖼 Research Poster 1</a>
+          <a href="assets/docs/APHI_Poster.pdf"           target="_blank" class="action-btn">🖼 Research Poster 2</a>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    © 2025 Yoshiki Takeuchi &nbsp;·&nbsp;
+    <a href="https://www.linkedin.com/in/yoshiki-takeuchi-6a8500245" target="_blank">LinkedIn</a> &nbsp;·&nbsp;
+    <a href="mailto:ytakeuch92416@gmail.com">Email</a>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

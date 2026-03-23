@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yoshiki Takeuchi — Electrical Engineer</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0a0a0f; color: #fff; font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2.5rem;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .navbar .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.95);
+    }
+    .navbar ul { list-style: none; display: flex; gap: 0.25rem; margin: 0; padding: 0; }
+    .navbar a {
+      text-decoration: none;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.88rem; font-weight: 500;
+      padding: 0.45rem 0.9rem;
+      border-radius: 100px;
+      transition: all 0.2s ease;
+    }
+    .navbar a:hover, .navbar a.active {
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+    }
+    .nav-toggle {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .nav-toggle span {
+      display: block; width: 22px; height: 2px;
+      background: rgba(255,255,255,0.8); border-radius: 2px;
+    }
+
+    /* ══════════════════════
+       HERO
+       ══════════════════════ */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 6rem 2rem 3rem;
+    }
+
+    .hero-bg { position: absolute; inset: 0; z-index: 0; background: #0a0a0f; }
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      top: -20%; left: -10%;
+      width: 70%; height: 70%;
+      background: radial-gradient(ellipse, rgba(107,70,193,0.5) 0%, transparent 65%);
+      animation: bgFloat1 10s ease-in-out infinite alternate;
+      filter: blur(40px);
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      bottom: -20%; right: -10%;
+      width: 60%; height: 60%;
+      background: radial-gradient(ellipse, rgba(76,81,191,0.4) 0%, transparent 65%);
+      animation: bgFloat2 12s ease-in-out infinite alternate;
+      filter: blur(40px);
+    }
+    .hero-bg-extra {
+      position: absolute;
+      top: 30%; left: 35%;
+      width: 45%; height: 45%;
+      background: radial-gradient(ellipse, rgba(159,122,234,0.25) 0%, transparent 65%);
+      animation: bgFloat3 8s ease-in-out infinite alternate;
+      filter: blur(50px);
+      pointer-events: none;
+    }
+    @keyframes bgFloat1 { from { transform: translate(0,0) scale(1); } to { transform: translate(8%,10%) scale(1.15); } }
+    @keyframes bgFloat2 { from { transform: translate(0,0) scale(1); } to { transform: translate(-8%,-6%) scale(1.1); } }
+    @keyframes bgFloat3 { from { transform: translate(0,0) scale(1); } to { transform: translate(5%,-8%) scale(1.2); } }
+
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1100px; width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    /* ── Glass card ── */
+    .hero-card {
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(32px) saturate(160%);
+      -webkit-backdrop-filter: blur(32px) saturate(160%);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 28px;
+      padding: 2.75rem;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.05) inset, 0 32px 80px rgba(0,0,0,0.4), 0 0 60px rgba(107,70,193,0.15);
+      animation: cardIn 0.9s cubic-bezier(0.34,1.2,0.64,1) both;
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(30px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.25rem; }
+    .tags span {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.75);
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;
+      padding: 0.3rem 0.8rem; border-radius: 100px; text-transform: uppercase;
+      backdrop-filter: blur(10px); transition: all 0.2s ease;
+    }
+    .tags span:hover { background: rgba(107,70,193,0.4); color: #fff; border-color: rgba(107,70,193,0.6); }
+
+    /* Open to work badge */
+    .open-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.3);
+      color: #4ade80;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.04em;
+    }
+    .open-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+      50%      { box-shadow: 0 0 0 5px rgba(34,197,94,0); }
+    }
+
+    .hero-subtitle {
+      font-size: 0.9rem; color: rgba(255,255,255,0.5);
+      margin-bottom: 0.75rem; min-height: 1.4rem; font-style: italic;
+    }
+
+    .hero-card h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      font-weight: 400; line-height: 1.1;
+      color: #fff; margin-bottom: 0.6rem;
+    }
+
+    /* One-liner tagline */
+    .hero-tagline {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.04);
+      border-left: 2px solid rgba(167,139,250,0.5);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #c4b5fd, #818cf8, #a78bfa);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .gradient-text-alt {
+      background: linear-gradient(135deg, #818cf8, #c4b5fd);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .hero-bio {
+      font-size: 0.88rem; color: rgba(255,255,255,0.5);
+      line-height: 1.7; margin-bottom: 1.5rem;
+    }
+
+    .buttons { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+
+    .btn-glass-primary {
+      background: rgba(139,92,246,0.85); backdrop-filter: blur(10px);
+      color: #fff; padding: 0.7rem 1.5rem; border-radius: 100px;
+      font-weight: 600; font-size: 0.85rem; text-decoration: none;
+      border: 1px solid rgba(167,139,250,0.5);
+      box-shadow: 0 4px 20px rgba(107,70,193,0.4);
+      transition: all 0.25s ease;
+    }
+    .btn-glass-primary:hover { background: rgba(139,92,246,1); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(107,70,193,0.6); }
+
+    .btn-glass-outline {
+      background: rgba(255,255,255,0.07); backdrop-filter: blur(10px);
+      color: rgba(255,255,255,0.85); padding: 0.7rem 1.5rem; border-radius: 100px;
+      font-weight: 600; font-size: 0.85rem; text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.18); transition: all 0.25s ease;
+    }
+    .btn-glass-outline:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
+
+    .btn-glass-hire {
+      background: rgba(34,197,94,0.15); backdrop-filter: blur(10px);
+      color: #4ade80; padding: 0.7rem 1.5rem; border-radius: 100px;
+      font-weight: 600; font-size: 0.85rem; text-decoration: none;
+      border: 1px solid rgba(34,197,94,0.3); transition: all 0.25s ease;
+    }
+    .btn-glass-hire:hover { background: rgba(34,197,94,0.25); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(34,197,94,0.2); }
+
+    /* Stats */
+    .hero-stats { display: flex; gap: 0; align-items: center; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); }
+    .stat { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .stat-number { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: #c4b5fd; line-height: 1; }
+    .stat-label { font-size: 0.68rem; color: rgba(255,255,255,0.4); font-weight: 500; margin-top: 0.25rem; white-space: nowrap; }
+    .stat-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.1); }
+
+    /* ── Image panel ── */
+    .hero-image-panel {
+      position: relative; display: flex;
+      justify-content: center; align-items: center;
+      animation: imgIn 1s cubic-bezier(0.34,1.2,0.64,1) 0.15s both;
+    }
+    @keyframes imgIn { from { opacity: 0; transform: translateY(40px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+    .hero-image-panel::before {
+      content: ''; position: absolute; inset: -16px;
+      border-radius: 40% 60% 55% 45% / 45% 40% 60% 55%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      animation: morphBlob 9s ease-in-out infinite; z-index: 0;
+    }
+    .hero-image-panel::after {
+      content: ''; position: absolute; inset: 20px;
+      border-radius: 40% 60% 55% 45% / 45% 40% 60% 55%;
+      background: radial-gradient(ellipse, rgba(107,70,193,0.5) 0%, transparent 70%);
+      filter: blur(30px);
+      animation: morphBlob 9s ease-in-out infinite; z-index: 0;
+    }
+    .hero-image-panel img {
+      position: relative; z-index: 1;
+      width: 85%; max-width: 360px; height: 460px;
+      object-fit: cover; object-position: center top;
+      border-radius: 40% 60% 55% 45% / 45% 40% 60% 55%;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 40px rgba(107,70,193,0.3);
+      animation: morphBlob 9s ease-in-out infinite, floatImg 6s ease-in-out infinite;
+    }
+    @keyframes morphBlob {
+      0%,100% { border-radius: 40% 60% 55% 45% / 45% 40% 60% 55%; }
+      33%      { border-radius: 58% 42% 40% 60% / 60% 55% 45% 40%; }
+      66%      { border-radius: 45% 55% 60% 40% / 40% 60% 45% 55%; }
+    }
+    @keyframes floatImg {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      50%      { transform: translateY(-12px) rotate(0.5deg); }
+    }
+
+    .chip {
+      position: absolute;
+      background: rgba(255,255,255,0.08); backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 14px;
+      padding: 0.6rem 1rem; font-size: 0.78rem; font-weight: 600;
+      color: rgba(255,255,255,0.85); box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      white-space: nowrap; z-index: 3; animation: floatChip 4s ease-in-out infinite;
+    }
+    .chip-1 { top: 12%; right: -8%; animation-delay: 0s; }
+    .chip-2 { bottom: 22%; left: -10%; animation-delay: 1.5s; }
+    .chip-3 { bottom: 8%; right: 0%; animation-delay: 0.8s; }
+    @keyframes floatChip { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+
+    /* ══════════════════════
+       COMPANY LOGOS BAR
+       ══════════════════════ */
+    .logos-section {
+      background: #0d0d14;
+      padding: 2.5rem 2rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .logos-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .logos-label {
+      text-align: center;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+      margin-bottom: 1.75rem;
+    }
+
+    .logos-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    .logo-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0 2.5rem;
+      border-right: 1px solid rgba(255,255,255,0.07);
+      transition: opacity 0.3s ease;
+      opacity: 0.55;
+    }
+
+    .logo-item:last-child { border-right: none; }
+    .logo-item:hover { opacity: 1; }
+
+    .logo-item img {
+      height: 36px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(1.1) saturate(0.2) contrast(1.1);
+      opacity: 0.6;
+      transition: all 0.3s ease;
+    }
+
+    .logo-item:hover img {
+      filter: brightness(1.2) saturate(1) contrast(1);
+      opacity: 1;
+    }
+
+    .logo-item span {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.3);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* ══════════════════════
+       SKILLS ROW
+       ══════════════════════ */
+    .skills-section {
+      background: #0a0a0f;
+      padding: 4rem 2rem;
+    }
+
+    .skills-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .skills-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .skills-header p {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #a78bfa;
+      margin-bottom: 0.5rem;
+    }
+
+    .skills-header h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: #fff;
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      justify-content: center;
+    }
+
+    .skill-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      color: rgba(255,255,255,0.65);
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      transition: all 0.2s ease;
+      cursor: default;
+    }
+
+    .skill-chip:hover {
+      background: rgba(139,92,246,0.15);
+      border-color: rgba(167,139,250,0.3);
+      color: #c4b5fd;
+      transform: translateY(-2px);
+    }
+
+    .skill-chip .skill-icon { font-size: 1rem; }
+
+    /* ══════════════════════
+       FEATURED PROJECT
+       ══════════════════════ */
+    .featured-section {
+      background: #0d0d14;
+      padding: 4rem 2rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .featured-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .featured-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #a78bfa;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .featured-header {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .featured-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-radius: 24px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .featured-card:hover {
+      border-color: rgba(167,139,250,0.25);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 40px rgba(107,70,193,0.15);
+    }
+
+    .featured-img {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.6) saturate(0.8);
+      transition: transform 0.6s ease, filter 0.4s ease;
+      display: block;
+    }
+
+    .featured-card:hover .featured-img img {
+      transform: scale(1.04);
+      filter: brightness(0.75) saturate(1);
+    }
+
+    .featured-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, transparent 60%, rgba(13,13,20,0.8));
+    }
+
+    .featured-body {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .featured-tag {
+      display: inline-block;
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #a78bfa;
+      background: rgba(167,139,250,0.12);
+      border: 1px solid rgba(167,139,250,0.22);
+      padding: 0.25rem 0.7rem; border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .featured-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem; font-weight: 400;
+      color: #fff; line-height: 1.3;
+      margin-bottom: 0.85rem;
+    }
+
+    .featured-desc {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 1.5rem;
+    }
+
+    .featured-skills {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .featured-skills span {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.09);
+      color: rgba(255,255,255,0.5);
+      font-size: 0.72rem; font-weight: 500;
+      padding: 0.2rem 0.65rem; border-radius: 6px;
+    }
+
+    /* ══════════════════════
+       ABOUT SECTION
+       ══════════════════════ */
+    .about {
+      background: #0a0a0f;
+      padding: 5rem 2rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .about-inner {
+      max-width: 960px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.6fr;
+      gap: 4rem; align-items: start;
+    }
+
+    .about-label {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #a78bfa; margin-bottom: 0.85rem;
+    }
+
+    .about-left h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.2rem; font-weight: 400;
+      color: #fff; line-height: 1.2;
+    }
+    .about-left h2 span { color: #c4b5fd; }
+
+    .about-right p {
+      font-size: 0.97rem; line-height: 1.85;
+      color: rgba(255,255,255,0.55); margin-bottom: 1.1rem;
+    }
+    .about-right p strong { color: rgba(255,255,255,0.85); }
+
+    /* ── Scroll reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Footer ── */
+    .site-footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.3);
+      font-size: 0.82rem;
+      background: #0a0a0f;
+    }
+    .site-footer a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s ease; }
+    .site-footer a:hover { color: #a78bfa; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+      .tags, .buttons { justify-content: center; }
+      .hero-bio { margin: 0 auto 1.5rem; }
+      .hero-image-panel { max-width: 280px; margin: 0 auto; }
+      .hero-image-panel img { height: 340px; }
+      .chip-1 { right: -2%; } .chip-2 { left: -2%; }
+      .about-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .featured-card { grid-template-columns: 1fr; }
+      .featured-img { height: 220px; }
+      .logo-item { padding: 0 1.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .navbar { padding: 0.85rem 1.25rem; }
+      .nav-toggle { display: flex; }
+      .navbar nav {
+        display: none; position: absolute;
+        top: 60px; left: 0; right: 0;
+        background: rgba(10,10,15,0.95);
+        backdrop-filter: blur(20px);
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        z-index: 99;
+      }
+      .navbar nav.open { display: block; }
+      .navbar ul { flex-direction: column; gap: 0; align-items: center; }
+      .navbar ul li { width: 100%; text-align: center; }
+      .navbar a { display: block; padding: 0.85rem 1rem; border-radius: 0; }
+      .hero { padding: 5rem 1rem 2.5rem; }
+      .hero-card { padding: 1.75rem; border-radius: 20px; }
+      .hero-card h1 { font-size: 2rem; }
+      .hero-image-panel img { height: 280px; }
+      .chip { display: none; }
+      .about { padding: 3rem 1.25rem; }
+      .about-left h2 { font-size: 1.8rem; }
+      .logo-item { padding: 0 1rem; }
+      .logos-row { gap: 0.5rem; }
+      .featured-body { padding: 1.5rem; }
+    }
+
+    @media (max-height: 500px) and (orientation: landscape) {
+      .hero { padding: 4rem 1.5rem 1.5rem; }
+      .hero-inner { grid-template-columns: 1fr 1fr; text-align: left; }
+      .tags, .buttons { justify-content: flex-start; }
+      .hero-image-panel img { height: 200px; }
+      .chip { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">Yoshiki Takeuchi</div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="research.html" class="nav-link">Research</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <div class="hero-bg"><div class="hero-bg-extra"></div></div>
+    <div class="hero-inner">
+
+      <!-- Left glass card -->
+      <div class="hero-card">
+
+        <!-- Open to work badge -->
+        <div class="open-badge">
+          <span class="open-dot"></span>
+          Open to opportunities
+        </div>
+
+        <div class="tags">
+          <span>Engineering</span>
+          <span>Semiconductors</span>
+          <span>Research</span>
+          <span>Innovation</span>
+        </div>
+
+        <p class="hero-subtitle"><span id="typed-text" class="typed-word"></span></p>
+
+        <h1>
+          Meet <span class="gradient-text">Yoshiki<br>Takeuchi</span>,<br>
+          or <span class="gradient-text-alt">郭佳樹</span>
+        </h1>
+
+        <!-- One-liner tagline -->
+        <p class="hero-tagline">
+          Specializing in semiconductor fabrication and advanced packaging — from cleanroom to real industry.
+        </p>
+
+        <p class="hero-bio">
+          Purdue EE graduate · Incoming MS at UC Berkeley · TSMC &amp; Micron alumni.
+        </p>
+
+        <div class="buttons">
+          <a href="resume.html" class="btn-glass-primary">View Resume →</a>
+          <a href="projects.html" class="btn-glass-outline">See Projects</a>
+          <a href="contact.html" class="btn-glass-hire">📧 Hire Me</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-number">3×</span>
+            <span class="stat-label">Internships</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-number">6+</span>
+            <span class="stat-label">Projects</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-number">3</span>
+            <span class="stat-label">Languages</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-number">1</span>
+            <span class="stat-label">Research</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: image -->
+      <div class="hero-image-panel">
+        <img src="assets/images/profile_pic.JPG" alt="Yoshiki Takeuchi" />
+        <div class="chip chip-1">🎓 Purdue EE</div>
+        <div class="chip chip-2">⚡ TSMC · Micron</div>
+        <div class="chip chip-3">🔬 UC Berkeley MSE</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ COMPANY LOGOS BAR ══ -->
+  <section class="logos-section reveal">
+    <div class="logos-inner">
+      <p class="logos-label">Experience & Education</p>
+      <div class="logos-row">
+
+        <div class="logo-item">
+          <img src="assets/images/Tsmc.svg.png" alt="TSMC">
+          <span>TSMC</span>
+        </div>
+
+        <div class="logo-item">
+          <img src="assets/images/Micron-Logo.png" alt="Micron">
+          <span>Micron</span>
+        </div>
+
+        <div class="logo-item">
+          <img src="assets/images/Purdue_Boilermakers_logo.svg.png" alt="Purdue">
+          <span>Purdue University</span>
+        </div>
+
+        <div class="logo-item">
+          <img src="assets/images/cal_logo.png" alt="UC Berkeley">
+          <span>UC Berkeley</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SKILLS ROW ══ -->
+  <section class="skills-section reveal">
+    <div class="skills-inner">
+      <div class="skills-header">
+        <p>Technical Stack</p>
+        <h2>What I work with</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-chip"><span class="skill-icon">🐍</span> Python</div>
+        <div class="skill-chip"><span class="skill-icon">⚙️</span> SystemVerilog</div>
+        <div class="skill-chip"><span class="skill-icon">🔲</span> FPGA Design</div>
+        <div class="skill-chip"><span class="skill-icon">🖥️</span> STM32 / Embedded C</div>
+        <div class="skill-chip"><span class="skill-icon">📐</span> KiCad / PCB Layout</div>
+        <div class="skill-chip"><span class="skill-icon">⚗️</span> LTspice</div>
+        <div class="skill-chip"><span class="skill-icon">🔬</span> Cleanroom Fabrication</div>
+        <div class="skill-chip"><span class="skill-icon">💾</span> CMP · CVD · PVD</div>
+        <div class="skill-chip"><span class="skill-icon">📊</span> MATLAB</div>
+        <div class="skill-chip"><span class="skill-icon">🛠️</span> Oscilloscopes / DMM</div>
+        <div class="skill-chip"><span class="skill-icon">🗣️</span> English · Chinese · Japanese</div>
+        <div class="skill-chip"><span class="skill-icon">🐧</span> Linux</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FEATURED PROJECT ══
+  <section class="featured-section reveal">
+    <div class="featured-inner">
+      <p class="featured-label">Featured Work</p>
+      <h2 class="featured-header">Best Project</h2>
+
+      <div class="featured-card">
+        <div class="featured-img">
+          <img src="assets/images/EEG_Pic.png" alt="EEG BCI Project">
+        </div>
+        <div class="featured-body">
+          <span class="featured-tag">ECE49022 · Senior Design</span>
+          <h3 class="featured-title">Multichannel EEG-Based Brain-Computer Interface</h3>
+          <p class="featured-desc">Developed a real-time BCI system using EEG signals to enable hands-free device control for individuals with physical disabilities. Designed custom PCB, signal processing pipeline, and microcontroller firmware end-to-end.</p>
+          <div class="featured-skills">
+            <span>PCB Design</span>
+            <span>Microprocessor</span>
+            <span>Signal Processing</span>
+            <span>EEG</span>
+          </div>
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <a href="assets/docs/Final Design Review.pdf" target="_blank" class="btn-glass-primary" style="font-size:0.82rem; padding:0.55rem 1.25rem;">📽 View Demo</a>
+            <a href="projects.html" class="btn-glass-outline" style="font-size:0.82rem; padding:0.55rem 1.25rem;">All Projects →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section> -->
+
+  <!-- ══ ABOUT ══ -->
+  <section class="about reveal">
+    <div class="about-inner">
+      <div class="about-left">
+        <p class="about-label">About Me</p>
+        <h2>Bridging research &amp; <span>real-world</span> semiconductor technology</h2>
+      </div>
+      <div class="about-right">
+        <p>I'm Yoshiki Takeuchi, an electrical engineering graduate from Purdue University, specializing in semiconductor research and cleanroom fabrication. I'll be pursuing a master's degree at UC Berkeley, focusing on semiconductor and thin film.</p>
+        <p>My recent internships at <strong>TSMC</strong> and <strong>Micron</strong> involved process integration and advanced packaging, where I honed my skills in cutting-edge semiconductor technologies.</p>
+        <p>Outside of work, I'm passionate about exploring innovative ideas, staying active at the gym, playing the violin, and participating in community activities that foster creativity and growth. Let's connect and drive innovation together!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    © 2025 Yoshiki Takeuchi &nbsp;·&nbsp;
+    <a href="https://www.linkedin.com/in/yoshiki-takeuchi-6a8500245" target="_blank">LinkedIn</a> &nbsp;·&nbsp;
+    <a href="mailto:ytakeuch92416@gmail.com">Email</a> &nbsp;·&nbsp;
+    <a href="assets/docs/Internship_Resume_Yoshiki_Takeuchi.pdf" download>Download Resume</a>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

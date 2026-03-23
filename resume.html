@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume — Yoshiki Takeuchi</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -15%; left: -10%;
+      width: 55%; height: 55%;
+      background: radial-gradient(ellipse, rgba(107,70,193,0.3) 0%, transparent 65%);
+      filter: blur(60px);
+      pointer-events: none; z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -15%; right: -10%;
+      width: 50%; height: 50%;
+      background: radial-gradient(ellipse, rgba(76,81,191,0.22) 0%, transparent 65%);
+      filter: blur(60px);
+      pointer-events: none; z-index: 0;
+    }
+
+    .resume-page {
+      position: relative; z-index: 1;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 7rem 2rem 5rem;
+    }
+
+    /* ── Header ── */
+    .resume-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: nowrap;
+      gap: 2rem;
+      margin-bottom: 4rem;
+      animation: fadeInUp 0.7s ease both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .resume-header-left { flex-shrink: 0; }
+
+    .resume-header-left h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
+      font-weight: 400;
+      background: linear-gradient(135deg, #c4b5fd, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+      margin-bottom: 0.3rem;
+    }
+
+    .resume-header-left p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .resume-header-right {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+
+    .header-stat {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .header-stat span {
+      color: #c4b5fd;
+      font-weight: 700;
+      margin-right: 0.25rem;
+    }
+
+    /* ── Section ── */
+    .resume-section { margin-bottom: 4rem; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .section-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+
+    .section-icon.purple { background: rgba(139,92,246,0.2); border: 1px solid rgba(139,92,246,0.3); }
+    .section-icon.blue   { background: rgba(99,102,241,0.2);  border: 1px solid rgba(99,102,241,0.3); }
+    .section-icon.pink   { background: rgba(236,72,153,0.2);  border: 1px solid rgba(236,72,153,0.3); }
+    .section-icon.cyan   { background: rgba(6,182,212,0.2);   border: 1px solid rgba(6,182,212,0.3); }
+
+    .section-label-text {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+    }
+
+    .section-label-text.purple { color: #a78bfa; }
+    .section-label-text.blue   { color: #818cf8; }
+    .section-label-text.pink   { color: #f472b6; }
+    .section-label-text.cyan   { color: #22d3ee; }
+
+    .section-line { flex: 1; height: 1px; background: rgba(255,255,255,0.06); }
+
+    /* ── Timeline ── */
+    .timeline { position: relative; padding-left: 2rem; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px;
+      width: 1px;
+      height: calc(100% - 8px);
+      background: linear-gradient(to bottom, rgba(139,92,246,0.6), rgba(139,92,246,0.1) 85%, transparent);
+    }
+
+    /* ── Experience card ── */
+    .exp-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0;
+      margin-bottom: 1.5rem;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .exp-card::before {
+      content: '';
+      position: absolute;
+      left: -2rem; top: 1.6rem;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: #a78bfa;
+      border: 2px solid #0a0a0f;
+      box-shadow: 0 0 10px rgba(167,139,250,0.6);
+      z-index: 2;
+    }
+
+    .exp-left {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-right: none;
+      border-radius: 20px 0 0 20px;
+      padding: 1.75rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .company-logo-wrap {
+      width: 54px; height: 54px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+      padding: 8px; overflow: hidden;
+    }
+
+    .company-logo-wrap img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      filter: brightness(1.1);
+    }
+
+    .exp-role {
+      font-size: 0.82rem; font-weight: 700;
+      color: #c4b5fd; line-height: 1.4; margin-bottom: 0.5rem;
+    }
+
+    .exp-date {
+      font-size: 0.72rem; color: rgba(255,255,255,0.3);
+      font-weight: 500; display: block; margin-bottom: 0.5rem;
+    }
+
+    .exp-company {
+      font-size: 0.8rem; font-weight: 600;
+      color: rgba(255,255,255,0.55); line-height: 1.5;
+    }
+
+    .exp-location {
+      display: block; font-weight: 400;
+      font-size: 0.72rem; color: rgba(255,255,255,0.28); margin-top: 0.2rem;
+    }
+
+    .exp-right {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-left: none;
+      border-radius: 0 20px 20px 0;
+      padding: 1.75rem 2rem;
+    }
+
+    .achievement-chips {
+      display: flex; flex-wrap: wrap;
+      gap: 0.5rem; margin-bottom: 1.1rem;
+    }
+
+    .achip {
+      background: rgba(139,92,246,0.15);
+      border: 1px solid rgba(139,92,246,0.3);
+      color: #c4b5fd; font-size: 0.75rem; font-weight: 700;
+      padding: 0.28rem 0.75rem; border-radius: 100px; white-space: nowrap;
+    }
+
+    .achip.blue {
+      background: rgba(99,102,241,0.15);
+      border-color: rgba(99,102,241,0.3); color: #a5b4fc;
+    }
+
+    .achip.green {
+      background: rgba(34,197,94,0.12);
+      border-color: rgba(34,197,94,0.25); color: #4ade80;
+    }
+
+    .exp-right ul { padding-left: 1.1rem; margin: 0; }
+
+    .exp-right ul li {
+      font-size: 0.9rem; color: rgba(255,255,255,0.55);
+      line-height: 1.75; margin-bottom: 0.55rem;
+    }
+
+    .exp-right ul li strong { color: rgba(255,255,255,0.8); font-weight: 600; }
+
+    .doc-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin-top: 0.85rem;
+      background: rgba(139,92,246,0.15);
+      border: 1px solid rgba(139,92,246,0.3);
+      color: #c4b5fd; font-size: 0.78rem; font-weight: 600;
+      padding: 0.4rem 0.9rem; border-radius: 100px;
+      text-decoration: none; transition: all 0.2s ease;
+    }
+    .doc-btn:hover { background: rgba(139,92,246,0.3); transform: translateY(-1px); }
+
+    /* ══════════════════════════
+       PHOTO GALLERY
+       ══════════════════════════ */
+    .photo-gallery {
+      margin-top: 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 1.1rem;
+    }
+
+    .photo-gallery-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .photo-gallery-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .photo-strip {
+      display: flex;
+      gap: 0.5rem;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .photo-strip img {
+      flex: 1;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: flex 0.45s cubic-bezier(0.4,0,0.2,1),
+                  filter 0.3s ease,
+                  border-color 0.3s ease;
+      cursor: zoom-in;
+      filter: brightness(0.75) saturate(0.85);
+      min-width: 0;
+    }
+
+    .photo-strip img:hover {
+      flex: 2.8;
+      filter: brightness(1) saturate(1.15);
+      border-color: rgba(167,139,250,0.35);
+    }
+
+    /* Placeholder for missing photos */
+    .photo-slot {
+      flex: 1;
+      height: 110px;
+      border-radius: 10px;
+      border: 1.5px dashed rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      min-width: 0;
+      cursor: default;
+    }
+
+    .photo-slot .slot-icon { font-size: 1.3rem; opacity: 0.4; }
+
+    .photo-slot p {
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.18);
+      text-align: center;
+      padding: 0 0.5rem;
+      line-height: 1.4;
+    }
+
+    /* ── Education card ── */
+    .edu-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      margin-bottom: 1.5rem;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .edu-card::before {
+      content: '';
+      position: absolute;
+      left: -2rem; top: 1.6rem;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: #818cf8;
+      border: 2px solid #0a0a0f;
+      box-shadow: 0 0 10px rgba(129,140,248,0.6);
+      z-index: 2;
+    }
+
+    .edu-left {
+      background: rgba(99,102,241,0.06);
+      border: 1px solid rgba(99,102,241,0.12);
+      border-right: none;
+      border-radius: 20px 0 0 20px;
+      padding: 1.75rem 1.5rem;
+    }
+
+    .edu-right {
+      background: rgba(99,102,241,0.03);
+      border: 1px solid rgba(99,102,241,0.1);
+      border-left: none;
+      border-radius: 0 20px 20px 0;
+      padding: 1.75rem 2rem;
+    }
+
+    .edu-degree {
+      font-size: 0.82rem; font-weight: 700;
+      color: #a5b4fc; line-height: 1.4; margin-bottom: 0.5rem;
+    }
+
+    .edu-right ul li {
+      font-size: 0.9rem; color: rgba(255,255,255,0.5);
+      line-height: 1.75; margin-bottom: 0.5rem;
+    }
+
+    /* ── Leadership card ── */
+    .lead-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      margin-bottom: 1.5rem;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .lead-card::before {
+      content: '';
+      position: absolute;
+      left: -2rem; top: 1.6rem;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: #f472b6;
+      border: 2px solid #0a0a0f;
+      box-shadow: 0 0 10px rgba(244,114,182,0.6);
+      z-index: 2;
+    }
+
+    .lead-left {
+      background: rgba(236,72,153,0.06);
+      border: 1px solid rgba(236,72,153,0.12);
+      border-right: none;
+      border-radius: 20px 0 0 20px;
+      padding: 1.75rem 1.5rem;
+    }
+
+    .lead-right {
+      background: rgba(236,72,153,0.03);
+      border: 1px solid rgba(236,72,153,0.1);
+      border-left: none;
+      border-radius: 0 20px 20px 0;
+      padding: 1.75rem 2rem;
+    }
+
+    .lead-title {
+      font-size: 0.82rem; font-weight: 700;
+      color: #f9a8d4; line-height: 1.4; margin-bottom: 0.35rem;
+    }
+
+    .lead-role {
+      font-size: 0.75rem; font-style: italic;
+      color: rgba(255,255,255,0.3); margin-top: 0.3rem;
+    }
+
+    .lead-right ul li {
+      font-size: 0.9rem; color: rgba(255,255,255,0.5); line-height: 1.75;
+    }
+
+    /* ── Skills ── */
+    .skills-outer {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .skill-group {
+      position: relative; overflow: hidden;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px; padding: 1.5rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .skill-group:hover {
+      border-color: rgba(167,139,250,0.2);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+
+    .skill-group::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+      transition: left 0.6s ease;
+    }
+    .skill-group:hover::after { left: 150%; }
+
+    .skill-group-title {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+
+    .skill-group-title img {
+      width: 14px; height: 14px;
+      filter: invert(1) brightness(0.5);
+    }
+
+    .skill-pill {
+      display: inline-block;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.09);
+      color: rgba(255,255,255,0.65);
+      font-size: 0.8rem; font-weight: 500;
+      padding: 0.35rem 0.8rem; border-radius: 8px;
+      margin: 0.25rem 0.25rem 0 0;
+      transition: all 0.2s ease;
+    }
+
+    .skill-pill:hover {
+      background: rgba(139,92,246,0.2);
+      border-color: rgba(167,139,250,0.35);
+      color: #c4b5fd; transform: translateY(-1px);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .exp-card, .edu-card, .lead-card { grid-template-columns: 1fr; }
+      .exp-left, .edu-left, .lead-left {
+        border-right: 1px solid rgba(255,255,255,0.08);
+        border-bottom: none;
+        border-radius: 20px 20px 0 0;
+      }
+      .exp-right, .edu-right, .lead-right {
+        border-left: 1px solid rgba(255,255,255,0.08);
+        border-top: none;
+        border-radius: 0 0 20px 20px;
+      }
+      .skills-outer { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .resume-page { padding: 5.5rem 1rem 3rem; }
+      .resume-header { flex-wrap: wrap; }
+      .resume-header-right { justify-content: flex-start; }
+      .timeline { padding-left: 1.25rem; }
+      .exp-card::before, .edu-card::before, .lead-card::before { left: -1.25rem; }
+      .skills-outer { grid-template-columns: 1fr; }
+      .photo-strip img, .photo-slot { height: 85px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">Yoshiki Takeuchi</div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="resume.html" class="nav-link active">Resume</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="research.html" class="nav-link">Research</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="resume-page">
+
+    <!-- Header -->
+    <div class="resume-header">
+      <div class="resume-header-left">
+        <h1>Resume</h1>
+        <p>Last updated · March 2025</p>
+      </div>
+      <div class="resume-header-right">
+        <div class="header-stat"><span>3×</span>Internships</div>
+        <div class="header-stat"><span>4+</span>Years Experience</div>
+        <div class="header-stat"><span>3</span>Languages</div>
+        <div class="header-stat"><span>6+</span>Projects</div>
+        <a href="assets/docs/Internship_Resume_Yoshiki_Takeuchi.pdf" class="btn-glass-primary" download>
+          📄 Download PDF
+        </a>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════
+         INTERNSHIP EXPERIENCE
+         ══════════════════════════════ -->
+    <section class="resume-section reveal">
+      <div class="section-header">
+        <div class="section-icon purple">💼</div>
+        <span class="section-label-text purple">Internship Experience</span>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="timeline">
+
+        <!-- ── Micron ── -->
+        <div class="exp-card reveal">
+          <div class="exp-left">
+            <div class="company-logo-wrap">
+              <img src="assets/images/Micron-Logo.png" alt="Micron">
+            </div>
+            <p class="exp-role">Advanced Packaging Thinning Process Engineer Intern</p>
+            <span class="exp-date">July – Aug 2025</span>
+            <p class="exp-company">Micron Technology<span class="exp-location">Taichung, Taiwan</span></p>
+          </div>
+          <div class="exp-right">
+            <div class="achievement-chips">
+              <span class="achip green">↑ Uniformity +<span data-count="41" data-prefix="0." data-suffix="%">0.41%</span></span>
+              <span class="achip green">↓ TTV <span data-count="526" data-suffix=" Å">526 Å</span></span>
+              <span class="achip">HBM Packaging</span>
+              <span class="achip blue">DOE · CMP</span>
+            </div>
+            <ul>
+              <li>Improved wafer uniformity and total thickness variation (TTV) for <strong>High Bandwidth Memory (HBM)</strong> packaging using Design of Experiment (DOE) with 25 blanket silicon wafers.</li>
+              <li>Conducted wafer correlation analysis using a correlation matrix to reduce incoming wafer noise and improve data consistency for CMP experiments.</li>
+              <li>Developed HBM process flow summary presentation showcasing PWF, Advanced Packaging, and CMP expertise.</li>
+              <li>Enhanced wafer uniformity by 0.41% and reduced TTV by 526 Å, improving HBM wafer thinning process performance.</li>
+            </ul>
+            <a href="assets/docs/Yoshiki Takeuchi Intern Project - CMP Swing Improvement.pdf" target="_blank" class="doc-btn">📽 View Project Presentation</a>
+
+            <!-- ── Micron Photo Gallery ── -->
+            <div class="photo-gallery">
+              <p class="photo-gallery-label">📸 Memories</p>
+              <div class="photo-strip">
+
+                <img src="assets/images/Micron1.jpeg" alt="Micron group photo"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none">
+                  <span class="slot-icon">📷</span>
+                  <p>micron-group.jpg</p>
+                </div>
+
+                <img src="assets/images/Micron2.JPG" alt="Micron lab"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none">
+                  <span class="slot-icon">🔬</span>
+                  <p>micron-lab.jpg</p>
+                </div>
+
+                <img src="assets/images/Micron3.jpeg" alt="Micron team"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none">
+                  <span class="slot-icon">👥</span>
+                  <p>micron-team.jpg</p>
+                </div>
+
+                <img src="assets/images/Micron4.jpeg" alt="Micron work"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none">
+                  <span class="slot-icon">⚙️</span>
+                  <p>micron-work.jpg</p>
+                </div>
+
+                <img src="assets/images/Micron5.jpeg" alt="Micron work"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none">
+                  <span class="slot-icon">⚙️</span>
+                  <p>micron-work.jpg</p>
+                </div>
+
+                <img src="assets/images/Micron6.JPG" alt="Micron work"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none">
+                  <span class="slot-icon">⚙️</span>
+                  <p>micron-work.jpg</p>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── TSMC Process Integration ── -->
+        <div class="exp-card reveal">
+          <div class="exp-left">
+            <div class="company-logo-wrap">
+              <img src="assets/images/Tsmc.svg.png" alt="TSMC">
+            </div>
+            <p class="exp-role">Process Integration Engineer Intern</p>
+            <span class="exp-date">June – Aug 2024</span>
+            <p class="exp-company">TSMC<span class="exp-location">Taichung, Taiwan</span></p>
+          </div>
+          <div class="exp-right">
+            <div class="achievement-chips">
+              <span class="achip">N28 Technology</span>
+              <span class="achip blue">FEOL · BEOL</span>
+              <span class="achip">MRAM Case Study</span>
+              <span class="achip blue">High-k · Metal Gate</span>
+            </div>
+            <ul>
+              <li>Assessed FEOL and BEOL process flows, including High-K dielectric, metal gate, SiGe Loop, and Nisisalicide Loop to optimize process.</li>
+              <li>Investigated MRAM integration challenges, analyzing temperature-dependent coercive field reduction and plasma effects on magnetic tunnel junction stability.</li>
+              <li>Leveraged Grain-Orientation Induced Work Function Variation in nanoscale metal-gate transistors to analyze device performance.</li>
+            </ul>
+
+            <!-- ── TSMC 2024 Photo Gallery ── -->
+            <div class="photo-gallery">
+              <p class="photo-gallery-label">📸 Memories</p>
+              <div class="photo-strip">
+
+                <img src="assets/images/TSMC2_1.JPG" alt="TSMC 2024 group"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none">
+                  <span class="slot-icon">📷</span>
+                  <p>tsmc-2024-group.jpg</p>
+                </div>
+
+                <img src="assets/images/TSMC2_2.jpeg" alt="TSMC 2024 lab"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none">
+                  <span class="slot-icon">🏭</span>
+                  <p>tsmc-2024-lab.jpg</p>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── TSMC Intelligent Manufacturing ── -->
+        <div class="exp-card reveal">
+          <div class="exp-left">
+            <div class="company-logo-wrap">
+              <img src="assets/images/Tsmc.svg.png" alt="TSMC">
+            </div>
+            <p class="exp-role">Intelligent Manufacturing Engineer Intern</p>
+            <span class="exp-date">July – Aug 2023</span>
+            <p class="exp-company">TSMC<span class="exp-location">Taichung, Taiwan</span></p>
+          </div>
+          <div class="exp-right">
+            <div class="achievement-chips">
+              <span class="achip green">↓ Queue Time <span data-count="28" data-suffix="%">28%</span></span>
+              <span class="achip green">↓ Cycle Time <span data-count="1" data-prefix="0." data-suffix=" days">0.1 days</span></span>
+              <span class="achip blue">Python · Markov Chain</span>
+            </div>
+            <ul>
+              <li>Engineered a <strong>Python-driven Markov Chain model</strong> that reduced wafer queue times by 28%, significantly enhancing production efficiency.</li>
+              <li>Led the "Auto Target" project for <strong>N28 eFlash technology</strong>, reducing cycle times by 0.1 days.</li>
+              <li>Maintained AMHS operations in cleanroom environment and provided Japanese translation support.</li>
+            </ul>
+
+            <!-- ── TSMC 2023 Photo Gallery ── -->
+            <div class="photo-gallery">
+              <p class="photo-gallery-label">📸 Memories</p>
+              <div class="photo-strip">
+
+                <img src="assets/images/TSMC1_1.jpeg" alt="TSMC 2023 group"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none">
+                  <span class="slot-icon">📷</span>
+                  <p>tsmc-2023-group.jpg</p>
+                </div>
+
+                <img src="assets/images/TSMC1_2.JPG" alt="TSMC 2023 lab"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none">
+                  <span class="slot-icon">🏭</span>
+                  <p>tsmc-2023-lab.jpg</p>
+                </div>
+
+                <img src="assets/images/TSMC1_3.PNG" alt="TSMC 2023 team"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none">
+                  <span class="slot-icon">👥</span>
+                  <p>tsmc-2023-team.jpg</p>
+                </div>
+
+                <img src="assets/images/TSMC1_4.JPG" alt="TSMC 2023 memory"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none">
+                  <span class="slot-icon">🌟</span>
+                  <p>tsmc-2023-memory.jpg</p>
+                </div>
+
+
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════
+         EDUCATION
+         ══════════════════════════════ -->
+    <section class="resume-section reveal">
+      <div class="section-header">
+        <div class="section-icon blue">🎓</div>
+        <span class="section-label-text blue">Education</span>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="timeline">
+
+        <div class="edu-card reveal">
+          <div class="edu-left">
+            <div class="company-logo-wrap" style="border-color:rgba(99,102,241,0.2);">
+              <img src="assets/images/cal_logo.png" alt="UC Berkeley">
+            </div>
+            <p class="edu-degree">Master of Engineering in MSE</p>
+            <span class="exp-date">2026 – 2027</span>
+            <p class="exp-company">University of California, Berkeley<span class="exp-location">Berkeley, CA</span></p>
+          </div>
+          <div class="edu-right">
+            <div class="achievement-chips">
+              <span class="achip blue">Semiconductors</span>
+              <span class="achip blue">Thin Film</span>
+            </div>
+            <ul>
+              <li>Concentration in Semiconductors & Photonics.</li>
+              <li>Coursework and research focus to be updated as program begins in 2026.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="edu-card reveal">
+          <div class="edu-left">
+            <div class="company-logo-wrap" style="border-color:rgba(99,102,241,0.2);">
+              <img src="assets/images/Purdue_Boilermakers_logo.svg.png" alt="Purdue">
+            </div>
+            <p class="edu-degree">B.S. in Electrical & Computer Engineering</p>
+            <span class="exp-date">2021 – 2025</span>
+            <p class="exp-company">Purdue University<span class="exp-location">West Lafayette, IN</span></p>
+          </div>
+          <div class="edu-right">
+            <div class="achievement-chips">
+              <span class="achip blue">Semiconductor Research</span>
+              <span class="achip blue">Teaching Assistant</span>
+            </div>
+            <ul>
+              <li>Coursework: Digital System Design, Linear Circuit Analysis, Verilog on FPGA, Microprocessor Systems, Semiconductor Devices, Nanoelectronics, Electromagnetics.</li>
+              <li>Research focus on Semiconductor Fabrication at Birck Nanotechnology Center.</li>
+              <li>Undergraduate Teaching Assistant for ENGR131/132.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════
+         LEADERSHIP
+         ══════════════════════════════ -->
+    <section class="resume-section reveal">
+      <div class="section-header">
+        <div class="section-icon pink">🌟</div>
+        <span class="section-label-text pink">Leadership & Extracurricular</span>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="timeline">
+
+        <div class="lead-card reveal">
+          <div class="lead-left">
+            <p class="lead-title">Alpha Phi Omega</p>
+            <span class="exp-date">2023 – 2024</span>
+            <p class="exp-company">National Service Fraternity<span class="exp-location">West Lafayette, IN</span></p>
+            <p class="lead-role">Active Member · Pledge Trainer Buddy</p>
+          </div>
+          <div class="lead-right">
+            <ul>
+              <li>Completed <strong><span data-count="35" data-suffix=" hours">35 hours</span></strong> of community service per semester, organizing Fall 2023 pledge events as Pledge Trainer Buddy.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="lead-card reveal">
+          <div class="lead-left">
+            <p class="lead-title">Purdue Philharmonic Orchestra</p>
+            <span class="exp-date">2021 – 2022</span>
+            <p class="exp-company">Purdue University<span class="exp-location">West Lafayette, IN</span></p>
+            <p class="lead-role">Second Violinist</p>
+          </div>
+          <div class="lead-right">
+            <ul>
+              <li>Performed in the <strong>"Let Music Alive"</strong> European tour in summer 2022, playing in multiple concerts with the Purdue orchestra across Europe.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════
+         TECHNICAL SKILLS
+         ══════════════════════════════ -->
+    <section class="resume-section reveal">
+      <div class="section-header">
+        <div class="section-icon cyan">⚡</div>
+        <span class="section-label-text cyan">Technical Skills</span>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="skills-outer">
+
+        <div class="skill-group">
+          <div class="skill-group-title">
+            <img src="assets/images/programming_language_logo.png" alt="">
+            Programming
+          </div>
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">C Programming</span>
+          <span class="skill-pill">MATLAB</span>
+          <span class="skill-pill">SystemVerilog</span>
+          <span class="skill-pill">Assembly</span>
+          <span class="skill-pill">Linux</span>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">
+            <img src="assets/images/language_logo.png" alt="">
+            Languages
+          </div>
+          <span class="skill-pill">English</span>
+          <span class="skill-pill">Chinese</span>
+          <span class="skill-pill">Japanese</span>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">
+            <img src="assets/images/tools_logo.svg" alt="">
+            Software & Tools
+          </div>
+          <span class="skill-pill">LTspice</span>
+          <span class="skill-pill">STM32CubeIDE</span>
+          <span class="skill-pill">KiCad</span>
+          <span class="skill-pill">PCB Layout</span>
+          <span class="skill-pill">Oscilloscopes</span>
+          <span class="skill-pill">Digital Multimeters</span>
+          <span class="skill-pill">Power Supply</span>
+          <span class="skill-pill">Microsoft Office</span>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    © 2025 Yoshiki Takeuchi &nbsp;·&nbsp;
+    <a href="https://www.linkedin.com/in/yoshiki-takeuchi-6a8500245" target="_blank">LinkedIn</a> &nbsp;·&nbsp;
+    <a href="mailto:ytakeuch92416@gmail.com">Email</a>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
