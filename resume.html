@@ -90,7 +90,9 @@
     .exp-card {
       position: relative; display: grid;
       grid-template-columns: 200px 1fr; gap: 0;
-      margin-bottom: 1.5rem; border-radius: 20px; overflow: hidden;
+      margin-bottom: 1.5rem; border-radius: 20px;
+      overflow: visible;
+      max-width: 100%;
     }
     .exp-card::before {
       content: ''; position: absolute; left: -2rem; top: 1.6rem;
@@ -117,6 +119,7 @@
     .exp-right {
       background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
       border-left: none; border-radius: 0 20px 20px 0; padding: 1.75rem 2rem;
+      min-width: 0; overflow: hidden; word-break: break-word;
     }
     .achievement-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.1rem; }
     .achip {
@@ -165,7 +168,8 @@
     /* ── Education card ── */
     .edu-card {
       position: relative; display: grid; grid-template-columns: 200px 1fr;
-      margin-bottom: 1.5rem; border-radius: 20px; overflow: hidden;
+      margin-bottom: 1.5rem; border-radius: 20px;
+      overflow: visible; max-width: 100%;
     }
     .edu-card::before {
       content: ''; position: absolute; left: -2rem; top: 1.6rem;
@@ -187,7 +191,8 @@
     /* ── Leadership card ── */
     .lead-card {
       position: relative; display: grid; grid-template-columns: 200px 1fr;
-      margin-bottom: 1.5rem; border-radius: 20px; overflow: hidden;
+      margin-bottom: 1.5rem; border-radius: 20px;
+      overflow: visible; max-width: 100%;
     }
     .lead-card::before {
       content: ''; position: absolute; left: -2rem; top: 1.6rem;
@@ -238,45 +243,99 @@
        RESPONSIVE — TABLET (max 900px)
        ══════════════════════════════════ */
     @media (max-width: 900px) {
-      .exp-card, .edu-card, .lead-card { grid-template-columns: 1fr; }
+      /* Cards collapse to single column */
+      .exp-card, .edu-card, .lead-card {
+        grid-template-columns: 1fr;
+        overflow: visible;
+      }
       .exp-left, .edu-left, .lead-left {
         border-right: 1px solid rgba(255,255,255,0.08);
-        border-bottom: none; border-radius: 20px 20px 0 0;
+        border-bottom: none;
+        border-radius: 20px 20px 0 0;
       }
       .exp-right, .edu-right, .lead-right {
         border-left: 1px solid rgba(255,255,255,0.08);
-        border-top: none; border-radius: 0 0 20px 20px;
+        border-top: none;
+        border-radius: 0 0 20px 20px;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        word-break: break-word;
+        overflow-wrap: break-word;
       }
       .skills-outer { grid-template-columns: 1fr 1fr; }
       .resume-header { flex-wrap: wrap; gap: 1rem; }
       .resume-header-right { justify-content: flex-start; flex-wrap: wrap; }
+
+      /* Fix text overflow in right panels */
+      .exp-right ul, .edu-right ul, .lead-right ul {
+        padding-left: 1rem;
+      }
+      .exp-right ul li, .edu-right ul li, .lead-right ul li {
+        word-break: break-word;
+        overflow-wrap: break-word;
+      }
+      /* Achievement chips wrap properly */
+      .achievement-chips { flex-wrap: wrap; }
+      .achip { white-space: normal; }
+
+      /* Photo strip scrollable on tablet */
+      .photo-strip { overflow-x: auto; flex-wrap: nowrap; }
+      .photo-strip img { min-width: 80px; flex: 0 0 80px; }
+      .photo-slot { min-width: 80px; flex: 0 0 80px; }
     }
 
     /* ══════════════════════════════════
        RESPONSIVE — MOBILE (max 600px)
        ══════════════════════════════════ */
     @media (max-width: 600px) {
-      .resume-page { padding: 5rem 0.85rem 3rem; }
+      .resume-page { padding: 5rem 0.75rem 3rem; }
+
+      /* Fix body overflow */
+      body { overflow-x: hidden; }
 
       /* Header stacks vertically */
-      .resume-header { flex-direction: column; align-items: flex-start; gap: 0.85rem; margin-bottom: 2.5rem; }
-      .resume-header-left h1 { font-size: 2.2rem; }
-      .resume-header-right { justify-content: flex-start; flex-wrap: wrap; gap: 0.4rem; width: 100%; }
-      .header-stat { font-size: 0.7rem; padding: 0.3rem 0.7rem; }
+      .resume-header {
+        flex-direction: column; align-items: flex-start;
+        gap: 0.85rem; margin-bottom: 2rem;
+      }
+      .resume-header-left h1 { font-size: 2rem; }
+      .resume-header-right {
+        justify-content: flex-start; flex-wrap: wrap;
+        gap: 0.4rem; width: 100%;
+      }
+      .header-stat { font-size: 0.7rem; padding: 0.3rem 0.65rem; }
       .btn-glass-primary { width: 100%; justify-content: center; }
 
-      /* Timeline narrower */
-      .timeline { padding-left: 1.1rem; }
-      .exp-card::before, .edu-card::before, .lead-card::before { left: -1.1rem; width: 8px; height: 8px; }
+      /* Timeline */
+      .timeline { padding-left: 1rem; }
+      .exp-card::before, .edu-card::before, .lead-card::before {
+        left: -1rem; width: 8px; height: 8px;
+      }
 
-      /* Card padding reduced */
-      .exp-left, .edu-left, .lead-left { padding: 1.1rem 1rem; }
-      .exp-right, .edu-right, .lead-right { padding: 1.1rem 1rem; }
+      /* Cards — full width, no overflow */
+      .exp-card, .edu-card, .lead-card {
+        grid-template-columns: 1fr;
+        width: 100%;
+        overflow: visible;
+      }
 
-      /* Smaller logo */
-      .company-logo-wrap { width: 42px; height: 42px; }
+      /* Panels */
+      .exp-left, .edu-left, .lead-left { padding: 1rem 0.9rem; }
+      .exp-right, .edu-right, .lead-right {
+        padding: 1rem 0.9rem;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+        word-break: break-word;
+        overflow-wrap: break-word;
+      }
 
-      /* Text */
+      /* Logo */
+      .company-logo-wrap { width: 40px; height: 40px; }
+
+      /* Text sizes */
       .exp-role, .edu-degree, .lead-title { font-size: 0.78rem; }
       .exp-right ul li, .edu-right ul li, .lead-right ul li { font-size: 0.83rem; line-height: 1.65; }
       .achievement-chips { gap: 0.3rem; }
@@ -395,7 +454,7 @@
               <div class="photo-strip">
                 <img src="assets/images/Micron1.jpeg" alt="Micron 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                 <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>Micron1.jpeg</p></div>
-                <img src="assets/images/Micron2.JPG" alt="Micron 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <img src="assets/images/Micron2.jpg" alt="Micron 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                 <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>Micron2.JPG</p></div>
                 <img src="assets/images/Micron3.jpeg" alt="Micron 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                 <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>Micron3.jpeg</p></div>
@@ -403,7 +462,7 @@
                 <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>Micron4.jpeg</p></div>
                 <img src="assets/images/Micron5.jpeg" alt="Micron 5" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                 <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>Micron5.jpeg</p></div>
-                <img src="assets/images/Micron6.JPG" alt="Micron 6" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <img src="assets/images/Micron6.jpg" alt="Micron 6" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                 <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>Micron6.JPG</p></div>
               </div>
             </div>
@@ -435,7 +494,7 @@
             <div class="photo-gallery">
               <p class="photo-gallery-label">📸 Memories</p>
               <div class="photo-strip">
-                <img src="assets/images/TSMC2_1.JPG" alt="TSMC 2024 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <img src="assets/images/TSMC2_1.jpg" alt="TSMC 2024 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                 <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>TSMC2_1.JPG</p></div>
                 <img src="assets/images/TSMC2_2.jpeg" alt="TSMC 2024 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                 <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>TSMC2_2.jpeg</p></div>
@@ -470,11 +529,11 @@
               <div class="photo-strip">
                 <img src="assets/images/TSMC1_1.jpeg" alt="TSMC 2023 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                 <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>TSMC1_1.jpeg</p></div>
-                <img src="assets/images/TSMC1_2.JPG" alt="TSMC 2023 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <img src="assets/images/TSMC1_2.jpg" alt="TSMC 2023 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                 <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>TSMC1_2.JPG</p></div>
-                <img src="assets/images/TSMC1_3.PNG" alt="TSMC 2023 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <img src="assets/images/TSMC1_3.png" alt="TSMC 2023 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                 <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>TSMC1_3.PNG</p></div>
-                <img src="assets/images/TSMC1_4.JPG" alt="TSMC 2023 4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <img src="assets/images/TSMC1_4.jpg" alt="TSMC 2023 4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                 <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>TSMC1_4.JPG</p></div>
               </div>
             </div>
@@ -631,9 +690,7 @@
   <footer class="site-footer">
     © 2025 Yoshiki Takeuchi &nbsp;·&nbsp;
     <a href="https://www.linkedin.com/in/yoshiki-takeuchi-6a8500245" target="_blank">LinkedIn</a> &nbsp;·&nbsp;
-    <a href="mailto:ytakeuch92416@gmail.com">Email</a>
+    <a href="/cdn-cgi/l/email-protection#433a3722282636202b7a7177727503242e222a2f6d202c2e">Email</a>
   </footer>
 
-  <script src="assets/js/main.js"></script>
-</body>
-</html>
+  <script dat
