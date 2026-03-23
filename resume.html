@@ -9,523 +9,314 @@
   <style>
 
     body::before {
-      content: '';
-      position: fixed;
-      top: -15%; left: -10%;
-      width: 55%; height: 55%;
+      content: ''; position: fixed;
+      top: -15%; left: -10%; width: 55%; height: 55%;
       background: radial-gradient(ellipse, rgba(107,70,193,0.3) 0%, transparent 65%);
-      filter: blur(60px);
-      pointer-events: none; z-index: 0;
+      filter: blur(60px); pointer-events: none; z-index: 0;
     }
     body::after {
-      content: '';
-      position: fixed;
-      bottom: -15%; right: -10%;
-      width: 50%; height: 50%;
+      content: ''; position: fixed;
+      bottom: -15%; right: -10%; width: 50%; height: 50%;
       background: radial-gradient(ellipse, rgba(76,81,191,0.22) 0%, transparent 65%);
-      filter: blur(60px);
-      pointer-events: none; z-index: 0;
+      filter: blur(60px); pointer-events: none; z-index: 0;
     }
 
     .resume-page {
       position: relative; z-index: 1;
-      max-width: 980px;
-      margin: 0 auto;
+      max-width: 980px; margin: 0 auto;
       padding: 7rem 2rem 5rem;
     }
 
     /* ── Header ── */
     .resume-header {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: nowrap;
-      gap: 2rem;
+      display: flex; flex-direction: row;
+      justify-content: space-between; align-items: center;
+      flex-wrap: nowrap; gap: 2rem;
       margin-bottom: 4rem;
       animation: fadeInUp 0.7s ease both;
     }
-
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     .resume-header-left { flex-shrink: 0; }
-
     .resume-header-left h1 {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.4rem, 4vw, 3.2rem);
-      font-weight: 400;
+      font-size: clamp(2.4rem, 4vw, 3.2rem); font-weight: 400;
       background: linear-gradient(135deg, #c4b5fd, #818cf8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1.1;
-      margin-bottom: 0.3rem;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1.1; margin-bottom: 0.3rem;
     }
-
-    .resume-header-left p {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.3);
-    }
-
+    .resume-header-left p { font-size: 0.82rem; color: rgba(255,255,255,0.3); }
     .resume-header-right {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-      flex: 1;
+      display: flex; flex-direction: row; align-items: center;
+      justify-content: flex-end; gap: 0.6rem; flex-wrap: wrap; flex: 1;
     }
-
     .header-stat {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 100px;
-      padding: 0.4rem 1rem;
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.5);
-      font-weight: 500;
-      white-space: nowrap;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px; padding: 0.4rem 1rem;
+      font-size: 0.78rem; color: rgba(255,255,255,0.5); font-weight: 500; white-space: nowrap;
     }
-
-    .header-stat span {
-      color: #c4b5fd;
-      font-weight: 700;
-      margin-right: 0.25rem;
-    }
+    .header-stat span { color: #c4b5fd; font-weight: 700; margin-right: 0.25rem; }
 
     /* ── Section ── */
     .resume-section { margin-bottom: 4rem; }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-      margin-bottom: 1.75rem;
-    }
-
+    .section-header { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1.75rem; }
     .section-icon {
-      width: 36px; height: 36px;
-      border-radius: 10px;
+      width: 36px; height: 36px; border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
       font-size: 1rem; flex-shrink: 0;
     }
-
     .section-icon.purple { background: rgba(139,92,246,0.2); border: 1px solid rgba(139,92,246,0.3); }
     .section-icon.blue   { background: rgba(99,102,241,0.2);  border: 1px solid rgba(99,102,241,0.3); }
     .section-icon.pink   { background: rgba(236,72,153,0.2);  border: 1px solid rgba(236,72,153,0.3); }
     .section-icon.cyan   { background: rgba(6,182,212,0.2);   border: 1px solid rgba(6,182,212,0.3); }
-
-    .section-label-text {
-      font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 0.14em; text-transform: uppercase;
-    }
-
+    .section-label-text { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
     .section-label-text.purple { color: #a78bfa; }
     .section-label-text.blue   { color: #818cf8; }
     .section-label-text.pink   { color: #f472b6; }
     .section-label-text.cyan   { color: #22d3ee; }
-
     .section-line { flex: 1; height: 1px; background: rgba(255,255,255,0.06); }
 
     /* ── Timeline ── */
     .timeline { position: relative; padding-left: 2rem; }
-
     .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 8px;
-      width: 1px;
-      height: calc(100% - 8px);
+      content: ''; position: absolute; left: 0; top: 8px;
+      width: 1px; height: calc(100% - 8px);
       background: linear-gradient(to bottom, rgba(139,92,246,0.6), rgba(139,92,246,0.1) 85%, transparent);
     }
 
     /* ── Experience card ── */
     .exp-card {
-      position: relative;
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 0;
-      margin-bottom: 1.5rem;
-      border-radius: 20px;
-      overflow: hidden;
+      position: relative; display: grid;
+      grid-template-columns: 200px 1fr; gap: 0;
+      margin-bottom: 1.5rem; border-radius: 20px; overflow: hidden;
     }
-
     .exp-card::before {
-      content: '';
-      position: absolute;
-      left: -2rem; top: 1.6rem;
-      width: 9px; height: 9px;
-      border-radius: 50%;
-      background: #a78bfa;
-      border: 2px solid #0a0a0f;
-      box-shadow: 0 0 10px rgba(167,139,250,0.6);
-      z-index: 2;
+      content: ''; position: absolute; left: -2rem; top: 1.6rem;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: #a78bfa; border: 2px solid #0a0a0f;
+      box-shadow: 0 0 10px rgba(167,139,250,0.6); z-index: 2;
     }
-
     .exp-left {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-right: none;
-      border-radius: 20px 0 0 20px;
-      padding: 1.75rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      border-right: none; border-radius: 20px 0 0 20px;
+      padding: 1.75rem 1.5rem; display: flex; flex-direction: column; align-items: flex-start;
     }
-
     .company-logo-wrap {
-      width: 54px; height: 54px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 14px;
+      width: 54px; height: 54px; background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1rem;
-      padding: 8px; overflow: hidden;
+      margin-bottom: 1rem; padding: 8px; overflow: hidden;
     }
-
-    .company-logo-wrap img {
-      width: 100%; height: 100%;
-      object-fit: contain;
-      filter: brightness(1.1);
-    }
-
-    .exp-role {
-      font-size: 0.82rem; font-weight: 700;
-      color: #c4b5fd; line-height: 1.4; margin-bottom: 0.5rem;
-    }
-
-    .exp-date {
-      font-size: 0.72rem; color: rgba(255,255,255,0.3);
-      font-weight: 500; display: block; margin-bottom: 0.5rem;
-    }
-
-    .exp-company {
-      font-size: 0.8rem; font-weight: 600;
-      color: rgba(255,255,255,0.55); line-height: 1.5;
-    }
-
-    .exp-location {
-      display: block; font-weight: 400;
-      font-size: 0.72rem; color: rgba(255,255,255,0.28); margin-top: 0.2rem;
-    }
-
+    .company-logo-wrap img { width: 100%; height: 100%; object-fit: contain; filter: brightness(1.1); }
+    .exp-role { font-size: 0.82rem; font-weight: 700; color: #c4b5fd; line-height: 1.4; margin-bottom: 0.5rem; }
+    .exp-date { font-size: 0.72rem; color: rgba(255,255,255,0.3); font-weight: 500; display: block; margin-bottom: 0.5rem; }
+    .exp-company { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.55); line-height: 1.5; }
+    .exp-location { display: block; font-weight: 400; font-size: 0.72rem; color: rgba(255,255,255,0.28); margin-top: 0.2rem; }
     .exp-right {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-left: none;
-      border-radius: 0 20px 20px 0;
-      padding: 1.75rem 2rem;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+      border-left: none; border-radius: 0 20px 20px 0; padding: 1.75rem 2rem;
     }
-
-    .achievement-chips {
-      display: flex; flex-wrap: wrap;
-      gap: 0.5rem; margin-bottom: 1.1rem;
-    }
-
+    .achievement-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.1rem; }
     .achip {
-      background: rgba(139,92,246,0.15);
-      border: 1px solid rgba(139,92,246,0.3);
+      background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3);
       color: #c4b5fd; font-size: 0.75rem; font-weight: 700;
       padding: 0.28rem 0.75rem; border-radius: 100px; white-space: nowrap;
     }
-
-    .achip.blue {
-      background: rgba(99,102,241,0.15);
-      border-color: rgba(99,102,241,0.3); color: #a5b4fc;
-    }
-
-    .achip.green {
-      background: rgba(34,197,94,0.12);
-      border-color: rgba(34,197,94,0.25); color: #4ade80;
-    }
-
+    .achip.blue { background: rgba(99,102,241,0.15); border-color: rgba(99,102,241,0.3); color: #a5b4fc; }
+    .achip.green { background: rgba(34,197,94,0.12); border-color: rgba(34,197,94,0.25); color: #4ade80; }
     .exp-right ul { padding-left: 1.1rem; margin: 0; }
-
-    .exp-right ul li {
-      font-size: 0.9rem; color: rgba(255,255,255,0.55);
-      line-height: 1.75; margin-bottom: 0.55rem;
-    }
-
+    .exp-right ul li { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.75; margin-bottom: 0.55rem; }
     .exp-right ul li strong { color: rgba(255,255,255,0.8); font-weight: 600; }
-
     .doc-btn {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      margin-top: 0.85rem;
-      background: rgba(139,92,246,0.15);
-      border: 1px solid rgba(139,92,246,0.3);
+      display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.85rem;
+      background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3);
       color: #c4b5fd; font-size: 0.78rem; font-weight: 600;
-      padding: 0.4rem 0.9rem; border-radius: 100px;
-      text-decoration: none; transition: all 0.2s ease;
+      padding: 0.4rem 0.9rem; border-radius: 100px; text-decoration: none; transition: all 0.2s ease;
     }
     .doc-btn:hover { background: rgba(139,92,246,0.3); transform: translateY(-1px); }
 
-    /* ══════════════════════════
-       PHOTO GALLERY
-       ══════════════════════════ */
-    .photo-gallery {
-      margin-top: 1.25rem;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding-top: 1.1rem;
-    }
-
+    /* ── Photo gallery ── */
+    .photo-gallery { margin-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1.1rem; }
     .photo-gallery-label {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,0.25);
+      margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;
     }
-
-    .photo-gallery-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: rgba(255,255,255,0.05);
-    }
-
-    .photo-strip {
-      display: flex;
-      gap: 0.5rem;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
+    .photo-gallery-label::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.05); }
+    .photo-strip { display: flex; gap: 0.5rem; border-radius: 12px; overflow: hidden; }
     .photo-strip img {
-      flex: 1;
-      height: 110px;
-      object-fit: cover;
-      border-radius: 10px;
+      flex: 1; height: 110px; object-fit: cover; border-radius: 10px;
       border: 1px solid rgba(255,255,255,0.07);
-      transition: flex 0.45s cubic-bezier(0.4,0,0.2,1),
-                  filter 0.3s ease,
-                  border-color 0.3s ease;
-      cursor: zoom-in;
-      filter: brightness(0.75) saturate(0.85);
-      min-width: 0;
+      transition: flex 0.45s cubic-bezier(0.4,0,0.2,1), filter 0.3s ease, border-color 0.3s ease;
+      cursor: zoom-in; filter: brightness(0.75) saturate(0.85); min-width: 0;
     }
-
-    .photo-strip img:hover {
-      flex: 2.8;
-      filter: brightness(1) saturate(1.15);
-      border-color: rgba(167,139,250,0.35);
-    }
-
-    /* Placeholder for missing photos */
+    .photo-strip img:hover { flex: 2.8; filter: brightness(1) saturate(1.15); border-color: rgba(167,139,250,0.35); }
     .photo-slot {
-      flex: 1;
-      height: 110px;
-      border-radius: 10px;
-      border: 1.5px dashed rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.02);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.3rem;
-      min-width: 0;
-      cursor: default;
+      flex: 1; height: 110px; border-radius: 10px;
+      border: 1.5px dashed rgba(255,255,255,0.08); background: rgba(255,255,255,0.02);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.3rem; min-width: 0; cursor: default;
     }
-
     .photo-slot .slot-icon { font-size: 1.3rem; opacity: 0.4; }
-
-    .photo-slot p {
-      font-size: 0.6rem;
-      color: rgba(255,255,255,0.18);
-      text-align: center;
-      padding: 0 0.5rem;
-      line-height: 1.4;
-    }
+    .photo-slot p { font-size: 0.6rem; color: rgba(255,255,255,0.18); text-align: center; padding: 0 0.5rem; line-height: 1.4; }
 
     /* ── Education card ── */
     .edu-card {
-      position: relative;
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      margin-bottom: 1.5rem;
-      border-radius: 20px;
-      overflow: hidden;
+      position: relative; display: grid; grid-template-columns: 200px 1fr;
+      margin-bottom: 1.5rem; border-radius: 20px; overflow: hidden;
     }
-
     .edu-card::before {
-      content: '';
-      position: absolute;
-      left: -2rem; top: 1.6rem;
-      width: 9px; height: 9px;
-      border-radius: 50%;
-      background: #818cf8;
-      border: 2px solid #0a0a0f;
-      box-shadow: 0 0 10px rgba(129,140,248,0.6);
-      z-index: 2;
+      content: ''; position: absolute; left: -2rem; top: 1.6rem;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: #818cf8; border: 2px solid #0a0a0f;
+      box-shadow: 0 0 10px rgba(129,140,248,0.6); z-index: 2;
     }
-
     .edu-left {
-      background: rgba(99,102,241,0.06);
-      border: 1px solid rgba(99,102,241,0.12);
-      border-right: none;
-      border-radius: 20px 0 0 20px;
-      padding: 1.75rem 1.5rem;
+      background: rgba(99,102,241,0.06); border: 1px solid rgba(99,102,241,0.12);
+      border-right: none; border-radius: 20px 0 0 20px; padding: 1.75rem 1.5rem;
     }
-
     .edu-right {
-      background: rgba(99,102,241,0.03);
-      border: 1px solid rgba(99,102,241,0.1);
-      border-left: none;
-      border-radius: 0 20px 20px 0;
-      padding: 1.75rem 2rem;
+      background: rgba(99,102,241,0.03); border: 1px solid rgba(99,102,241,0.1);
+      border-left: none; border-radius: 0 20px 20px 0; padding: 1.75rem 2rem;
     }
-
-    .edu-degree {
-      font-size: 0.82rem; font-weight: 700;
-      color: #a5b4fc; line-height: 1.4; margin-bottom: 0.5rem;
-    }
-
-    .edu-right ul li {
-      font-size: 0.9rem; color: rgba(255,255,255,0.5);
-      line-height: 1.75; margin-bottom: 0.5rem;
-    }
+    .edu-degree { font-size: 0.82rem; font-weight: 700; color: #a5b4fc; line-height: 1.4; margin-bottom: 0.5rem; }
+    .edu-right ul li { font-size: 0.9rem; color: rgba(255,255,255,0.5); line-height: 1.75; margin-bottom: 0.5rem; }
 
     /* ── Leadership card ── */
     .lead-card {
-      position: relative;
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      margin-bottom: 1.5rem;
-      border-radius: 20px;
-      overflow: hidden;
+      position: relative; display: grid; grid-template-columns: 200px 1fr;
+      margin-bottom: 1.5rem; border-radius: 20px; overflow: hidden;
     }
-
     .lead-card::before {
-      content: '';
-      position: absolute;
-      left: -2rem; top: 1.6rem;
-      width: 9px; height: 9px;
-      border-radius: 50%;
-      background: #f472b6;
-      border: 2px solid #0a0a0f;
-      box-shadow: 0 0 10px rgba(244,114,182,0.6);
-      z-index: 2;
+      content: ''; position: absolute; left: -2rem; top: 1.6rem;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: #f472b6; border: 2px solid #0a0a0f;
+      box-shadow: 0 0 10px rgba(244,114,182,0.6); z-index: 2;
     }
-
     .lead-left {
-      background: rgba(236,72,153,0.06);
-      border: 1px solid rgba(236,72,153,0.12);
-      border-right: none;
-      border-radius: 20px 0 0 20px;
-      padding: 1.75rem 1.5rem;
+      background: rgba(236,72,153,0.06); border: 1px solid rgba(236,72,153,0.12);
+      border-right: none; border-radius: 20px 0 0 20px; padding: 1.75rem 1.5rem;
     }
-
     .lead-right {
-      background: rgba(236,72,153,0.03);
-      border: 1px solid rgba(236,72,153,0.1);
-      border-left: none;
-      border-radius: 0 20px 20px 0;
-      padding: 1.75rem 2rem;
+      background: rgba(236,72,153,0.03); border: 1px solid rgba(236,72,153,0.1);
+      border-left: none; border-radius: 0 20px 20px 0; padding: 1.75rem 2rem;
     }
-
-    .lead-title {
-      font-size: 0.82rem; font-weight: 700;
-      color: #f9a8d4; line-height: 1.4; margin-bottom: 0.35rem;
-    }
-
-    .lead-role {
-      font-size: 0.75rem; font-style: italic;
-      color: rgba(255,255,255,0.3); margin-top: 0.3rem;
-    }
-
-    .lead-right ul li {
-      font-size: 0.9rem; color: rgba(255,255,255,0.5); line-height: 1.75;
-    }
+    .lead-title { font-size: 0.82rem; font-weight: 700; color: #f9a8d4; line-height: 1.4; margin-bottom: 0.35rem; }
+    .lead-role { font-size: 0.75rem; font-style: italic; color: rgba(255,255,255,0.3); margin-top: 0.3rem; }
+    .lead-right ul li { font-size: 0.9rem; color: rgba(255,255,255,0.5); line-height: 1.75; }
 
     /* ── Skills ── */
-    .skills-outer {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-
+    .skills-outer { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
     .skill-group {
       position: relative; overflow: hidden;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
       border-radius: 18px; padding: 1.5rem;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
-
-    .skill-group:hover {
-      border-color: rgba(167,139,250,0.2);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-    }
-
+    .skill-group:hover { border-color: rgba(167,139,250,0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
     .skill-group::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 60%; height: 100%;
+      content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
       transition: left 0.6s ease;
     }
     .skill-group:hover::after { left: 150%; }
-
     .skill-group-title {
-      font-size: 0.68rem; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: rgba(255,255,255,0.3); margin-bottom: 1rem;
-      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
     }
-
-    .skill-group-title img {
-      width: 14px; height: 14px;
-      filter: invert(1) brightness(0.5);
-    }
-
+    .skill-group-title img { width: 14px; height: 14px; filter: invert(1) brightness(0.5); }
     .skill-pill {
-      display: inline-block;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.09);
-      color: rgba(255,255,255,0.65);
-      font-size: 0.8rem; font-weight: 500;
-      padding: 0.35rem 0.8rem; border-radius: 8px;
-      margin: 0.25rem 0.25rem 0 0;
-      transition: all 0.2s ease;
+      display: inline-block; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.09);
+      color: rgba(255,255,255,0.65); font-size: 0.8rem; font-weight: 500;
+      padding: 0.35rem 0.8rem; border-radius: 8px; margin: 0.25rem 0.25rem 0 0; transition: all 0.2s ease;
     }
+    .skill-pill:hover { background: rgba(139,92,246,0.2); border-color: rgba(167,139,250,0.35); color: #c4b5fd; transform: translateY(-1px); }
 
-    .skill-pill:hover {
-      background: rgba(139,92,246,0.2);
-      border-color: rgba(167,139,250,0.35);
-      color: #c4b5fd; transform: translateY(-1px);
-    }
-
-    /* ── Responsive ── */
+    /* ══════════════════════════════════
+       RESPONSIVE — TABLET (max 900px)
+       ══════════════════════════════════ */
     @media (max-width: 900px) {
       .exp-card, .edu-card, .lead-card { grid-template-columns: 1fr; }
       .exp-left, .edu-left, .lead-left {
         border-right: 1px solid rgba(255,255,255,0.08);
-        border-bottom: none;
-        border-radius: 20px 20px 0 0;
+        border-bottom: none; border-radius: 20px 20px 0 0;
       }
       .exp-right, .edu-right, .lead-right {
         border-left: 1px solid rgba(255,255,255,0.08);
-        border-top: none;
-        border-radius: 0 0 20px 20px;
+        border-top: none; border-radius: 0 0 20px 20px;
       }
       .skills-outer { grid-template-columns: 1fr 1fr; }
+      .resume-header { flex-wrap: wrap; gap: 1rem; }
+      .resume-header-right { justify-content: flex-start; flex-wrap: wrap; }
     }
 
+    /* ══════════════════════════════════
+       RESPONSIVE — MOBILE (max 600px)
+       ══════════════════════════════════ */
     @media (max-width: 600px) {
-      .resume-page { padding: 5.5rem 1rem 3rem; }
-      .resume-header { flex-wrap: wrap; }
-      .resume-header-right { justify-content: flex-start; }
-      .timeline { padding-left: 1.25rem; }
-      .exp-card::before, .edu-card::before, .lead-card::before { left: -1.25rem; }
-      .skills-outer { grid-template-columns: 1fr; }
-      .photo-strip img, .photo-slot { height: 85px; }
+      .resume-page { padding: 5rem 0.85rem 3rem; }
+
+      /* Header stacks vertically */
+      .resume-header { flex-direction: column; align-items: flex-start; gap: 0.85rem; margin-bottom: 2.5rem; }
+      .resume-header-left h1 { font-size: 2.2rem; }
+      .resume-header-right { justify-content: flex-start; flex-wrap: wrap; gap: 0.4rem; width: 100%; }
+      .header-stat { font-size: 0.7rem; padding: 0.3rem 0.7rem; }
+      .btn-glass-primary { width: 100%; justify-content: center; }
+
+      /* Timeline narrower */
+      .timeline { padding-left: 1.1rem; }
+      .exp-card::before, .edu-card::before, .lead-card::before { left: -1.1rem; width: 8px; height: 8px; }
+
+      /* Card padding reduced */
+      .exp-left, .edu-left, .lead-left { padding: 1.1rem 1rem; }
+      .exp-right, .edu-right, .lead-right { padding: 1.1rem 1rem; }
+
+      /* Smaller logo */
+      .company-logo-wrap { width: 42px; height: 42px; }
+
+      /* Text */
+      .exp-role, .edu-degree, .lead-title { font-size: 0.78rem; }
+      .exp-right ul li, .edu-right ul li, .lead-right ul li { font-size: 0.83rem; line-height: 1.65; }
+      .achievement-chips { gap: 0.3rem; }
+      .achip { font-size: 0.68rem; padding: 0.2rem 0.55rem; }
+
+      /* Section spacing */
+      .resume-section { margin-bottom: 2.5rem; }
+      .section-header { margin-bottom: 1.25rem; }
+
+      /* Skills single column */
+      .skills-outer { grid-template-columns: 1fr; gap: 0.75rem; }
+      .skill-group { padding: 1.1rem; }
+
+      /* Photos */
+      .photo-strip img, .photo-slot { height: 80px; }
+    }
+
+    /* ══════════════════════════════════
+       RESPONSIVE — SMALL PHONES (380px)
+       ══════════════════════════════════ */
+    @media (max-width: 380px) {
+      .resume-page { padding: 5rem 0.6rem 2.5rem; }
+      .resume-header-left h1 { font-size: 1.9rem; }
+      .exp-left, .edu-left, .lead-left,
+      .exp-right, .edu-right, .lead-right { padding: 0.9rem 0.75rem; }
+      .achievement-chips .achip { font-size: 0.62rem; padding: 0.18rem 0.45rem; }
+    }
+
+    /* ══════════════════════════════════
+       RESPONSIVE — LANDSCAPE PHONE
+       ══════════════════════════════════ */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .resume-page { padding: 4.5rem 1.5rem 2rem; }
+      .exp-card, .edu-card, .lead-card { grid-template-columns: 160px 1fr; }
+      .exp-left, .edu-left, .lead-left {
+        border-right: none; border-bottom: none; border-radius: 20px 0 0 20px;
+      }
+      .exp-right, .edu-right, .lead-right {
+        border-left: none; border-top: none; border-radius: 0 20px 20px 0;
+      }
     }
   </style>
 </head>
@@ -566,20 +357,16 @@
       </div>
     </div>
 
-
-    <!-- ══════════════════════════════
-         INTERNSHIP EXPERIENCE
-         ══════════════════════════════ -->
+    <!-- ══ INTERNSHIP EXPERIENCE ══ -->
     <section class="resume-section reveal">
       <div class="section-header">
         <div class="section-icon purple">💼</div>
         <span class="section-label-text purple">Internship Experience</span>
         <div class="section-line"></div>
       </div>
-
       <div class="timeline">
 
-        <!-- ── Micron ── -->
+        <!-- Micron -->
         <div class="exp-card reveal">
           <div class="exp-left">
             <div class="company-logo-wrap">
@@ -603,61 +390,27 @@
               <li>Enhanced wafer uniformity by 0.41% and reduced TTV by 526 Å, improving HBM wafer thinning process performance.</li>
             </ul>
             <a href="assets/docs/Yoshiki Takeuchi Intern Project - CMP Swing Improvement.pdf" target="_blank" class="doc-btn">📽 View Project Presentation</a>
-
-            <!-- ── Micron Photo Gallery ── -->
             <div class="photo-gallery">
               <p class="photo-gallery-label">📸 Memories</p>
               <div class="photo-strip">
-
-                <img src="assets/images/Micron1.jpeg" alt="Micron group photo"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                <div class="photo-slot" style="display:none">
-                  <span class="slot-icon">📷</span>
-                  <p>micron-group.jpg</p>
-                </div>
-
-                <img src="assets/images/Micron2.jpg" alt="Micron lab"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                <div class="photo-slot" style="display:none">
-                  <span class="slot-icon">🔬</span>
-                  <p>micron-lab.jpg</p>
-                </div>
-
-                <img src="assets/images/Micron3.jpeg" alt="Micron team"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                <div class="photo-slot" style="display:none">
-                  <span class="slot-icon">👥</span>
-                  <p>micron-team.jpg</p>
-                </div>
-
-                <img src="assets/images/Micron4.jpeg" alt="Micron work"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                <div class="photo-slot" style="display:none">
-                  <span class="slot-icon">⚙️</span>
-                  <p>micron-work.jpg</p>
-                </div>
-
-                <img src="assets/images/Micron5.jpeg" alt="Micron work"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                <div class="photo-slot" style="display:none">
-                  <span class="slot-icon">⚙️</span>
-                  <p>micron-work.jpg</p>
-                </div>
-
-                <img src="assets/images/Micron6.jpg" alt="Micron work"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                <div class="photo-slot" style="display:none">
-                  <span class="slot-icon">⚙️</span>
-                  <p>micron-work.jpg</p>
-                </div>
-
+                <img src="assets/images/Micron1.jpeg" alt="Micron 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>Micron1.jpeg</p></div>
+                <img src="assets/images/Micron2.JPG" alt="Micron 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>Micron2.JPG</p></div>
+                <img src="assets/images/Micron3.jpeg" alt="Micron 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>Micron3.jpeg</p></div>
+                <img src="assets/images/Micron4.jpeg" alt="Micron 4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>Micron4.jpeg</p></div>
+                <img src="assets/images/Micron5.jpeg" alt="Micron 5" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>Micron5.jpeg</p></div>
+                <img src="assets/images/Micron6.JPG" alt="Micron 6" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>Micron6.JPG</p></div>
               </div>
             </div>
-
           </div>
         </div>
 
-        <!-- ── TSMC Process Integration ── -->
+        <!-- TSMC Process Integration -->
         <div class="exp-card reveal">
           <div class="exp-left">
             <div class="company-logo-wrap">
@@ -679,33 +432,19 @@
               <li>Investigated MRAM integration challenges, analyzing temperature-dependent coercive field reduction and plasma effects on magnetic tunnel junction stability.</li>
               <li>Leveraged Grain-Orientation Induced Work Function Variation in nanoscale metal-gate transistors to analyze device performance.</li>
             </ul>
-
-            <!-- ── TSMC 2024 Photo Gallery ── -->
             <div class="photo-gallery">
               <p class="photo-gallery-label">📸 Memories</p>
               <div class="photo-strip">
-
-                <img src="assets/images/TSMC2_1.jpg" alt="TSMC 2024 group"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                <div class="photo-slot" style="display:none">
-                  <span class="slot-icon">📷</span>
-                  <p>tsmc-2024-group.jpg</p>
-                </div>
-
-                <img src="assets/images/TSMC2_2.jpeg" alt="TSMC 2024 lab"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                <div class="photo-slot" style="display:none">
-                  <span class="slot-icon">🏭</span>
-                  <p>tsmc-2024-lab.jpg</p>
-                </div>
-
+                <img src="assets/images/TSMC2_1.JPG" alt="TSMC 2024 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>TSMC2_1.JPG</p></div>
+                <img src="assets/images/TSMC2_2.jpeg" alt="TSMC 2024 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>TSMC2_2.jpeg</p></div>
               </div>
             </div>
-
           </div>
         </div>
 
-        <!-- ── TSMC Intelligent Manufacturing ── -->
+        <!-- TSMC Intelligent Manufacturing -->
         <div class="exp-card reveal">
           <div class="exp-left">
             <div class="company-logo-wrap">
@@ -726,62 +465,32 @@
               <li>Led the "Auto Target" project for <strong>N28 eFlash technology</strong>, reducing cycle times by 0.1 days.</li>
               <li>Maintained AMHS operations in cleanroom environment and provided Japanese translation support.</li>
             </ul>
-
-            <!-- ── TSMC 2023 Photo Gallery ── -->
             <div class="photo-gallery">
               <p class="photo-gallery-label">📸 Memories</p>
               <div class="photo-strip">
-
-                <img src="assets/images/TSMC1_1.jpeg" alt="TSMC 2023 group"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                <div class="photo-slot" style="display:none">
-                  <span class="slot-icon">📷</span>
-                  <p>tsmc-2023-group.jpg</p>
-                </div>
-
-                <img src="assets/images/TSMC1_2.jpg" alt="TSMC 2023 lab"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                <div class="photo-slot" style="display:none">
-                  <span class="slot-icon">🏭</span>
-                  <p>tsmc-2023-lab.jpg</p>
-                </div>
-
-                <img src="assets/images/TSMC1_3.png" alt="TSMC 2023 team"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                <div class="photo-slot" style="display:none">
-                  <span class="slot-icon">👥</span>
-                  <p>tsmc-2023-team.jpg</p>
-                </div>
-
-                <img src="assets/images/TSMC1_4.jpg" alt="TSMC 2023 memory"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                <div class="photo-slot" style="display:none">
-                  <span class="slot-icon">🌟</span>
-                  <p>tsmc-2023-memory.jpg</p>
-                </div>
-
-
-
+                <img src="assets/images/TSMC1_1.jpeg" alt="TSMC 2023 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>TSMC1_1.jpeg</p></div>
+                <img src="assets/images/TSMC1_2.JPG" alt="TSMC 2023 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>TSMC1_2.JPG</p></div>
+                <img src="assets/images/TSMC1_3.PNG" alt="TSMC 2023 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>TSMC1_3.PNG</p></div>
+                <img src="assets/images/TSMC1_4.JPG" alt="TSMC 2023 4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-slot" style="display:none"><span class="slot-icon">📷</span><p>TSMC1_4.JPG</p></div>
               </div>
             </div>
-
           </div>
         </div>
 
       </div>
     </section>
 
-
-    <!-- ══════════════════════════════
-         EDUCATION
-         ══════════════════════════════ -->
+    <!-- ══ EDUCATION ══ -->
     <section class="resume-section reveal">
       <div class="section-header">
         <div class="section-icon blue">🎓</div>
         <span class="section-label-text blue">Education</span>
         <div class="section-line"></div>
       </div>
-
       <div class="timeline">
 
         <div class="edu-card reveal">
@@ -830,17 +539,13 @@
       </div>
     </section>
 
-
-    <!-- ══════════════════════════════
-         LEADERSHIP
-         ══════════════════════════════ -->
+    <!-- ══ LEADERSHIP ══ -->
     <section class="resume-section reveal">
       <div class="section-header">
         <div class="section-icon pink">🌟</div>
         <span class="section-label-text pink">Leadership & Extracurricular</span>
         <div class="section-line"></div>
       </div>
-
       <div class="timeline">
 
         <div class="lead-card reveal">
@@ -874,23 +579,18 @@
       </div>
     </section>
 
-
-    <!-- ══════════════════════════════
-         TECHNICAL SKILLS
-         ══════════════════════════════ -->
+    <!-- ══ TECHNICAL SKILLS ══ -->
     <section class="resume-section reveal">
       <div class="section-header">
         <div class="section-icon cyan">⚡</div>
         <span class="section-label-text cyan">Technical Skills</span>
         <div class="section-line"></div>
       </div>
-
       <div class="skills-outer">
 
         <div class="skill-group">
           <div class="skill-group-title">
-            <img src="assets/images/programming_language_logo.png" alt="">
-            Programming
+            <img src="assets/images/programming_language_logo.png" alt="">Programming
           </div>
           <span class="skill-pill">Python</span>
           <span class="skill-pill">C Programming</span>
@@ -902,8 +602,7 @@
 
         <div class="skill-group">
           <div class="skill-group-title">
-            <img src="assets/images/language_logo.png" alt="">
-            Languages
+            <img src="assets/images/language_logo.png" alt="">Languages
           </div>
           <span class="skill-pill">English</span>
           <span class="skill-pill">Chinese</span>
@@ -912,8 +611,7 @@
 
         <div class="skill-group">
           <div class="skill-group-title">
-            <img src="assets/images/tools_logo.svg" alt="">
-            Software & Tools
+            <img src="assets/images/tools_logo.svg" alt="">Software & Tools
           </div>
           <span class="skill-pill">LTspice</span>
           <span class="skill-pill">STM32CubeIDE</span>
